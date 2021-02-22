@@ -1,0 +1,196 @@
+@import './src/static/iconfont.css';
+
+.butterfly-monitor-dag {
+  background: #2E2E2E;
+  .schedule-node {
+    position: absolute;
+    border: 1px solid #595959;
+    color: #fff;
+    height: 32px;
+    min-width: 100px;
+    line-height: 30px;
+    border-radius: 16px;
+    cursor: pointer;
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .point {
+      position: absolute;
+      border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      border: 1px solid #595959;
+      background: #2E2E2E;
+      &.top-point {
+        top: -4px;
+        left: calc(~'50% - 4px');
+      }
+      &.bottom-point{
+        bottom: -4px;
+        left: calc(~'50% - 4px');
+      }
+      &.left-point {
+        top: calc(~'50% - 4px');
+        left: -4px;
+      }
+      &.right-point{
+        top: calc(~'50% - 4px');
+        right: -4px;
+      }
+    }
+    .title {
+      font-size: 12px;
+    }
+    .status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #595959;
+      margin: 0px 5px;
+    }
+    &.success {
+      border: 1px solid #60bfc5;
+      .status {
+        background: #60bfc5;
+      }
+      .point {
+        border: 1px solid #60bfc5;
+      }
+    }
+    &.fail {
+      border: 1px solid #d6413f;
+      .status {
+        background: #d6413f;
+      }
+      .point {
+        border: 1px solid #d6413f;
+      }
+    }
+    &.running {
+      border: 1px solid #4b96ef;
+      .status {
+        background: #4b96ef;
+      }
+      .point {
+        border: 1px solid #4b96ef;
+      }
+    }
+    &.waiting {
+      border: 1px solid #6a40c6;
+      .status {
+        background: #6a40c6;
+      }
+      .point {
+        border: 1px solid #6a40c6;
+      }
+    }
+    &.timeout {
+      border: 1px solid #ffd544;
+      .status {
+        background: #ffd544;
+      }
+      .point {
+        border: 1px solid #ffd544;
+      }
+    }
+    &.focus {
+      border: 1px solid #F66902;
+      box-shadow: 0px 0px 5px #f66902;
+      background: rgba(255, 255, 255, 0.06);
+      .point {
+        border: 1px solid #F66902;
+      }
+    }
+  }
+  .monitor-dag-link{
+    &.focus {
+      stroke: #F66902;
+    }
+  }
+  .monitor-dag-label {
+    transform: scale(0.8);
+    background: #313131;
+    border: 1px solid #828282;
+    padding: 1px 6px;
+    border-radius: 13px;
+    color: #fff;
+    cursor: pointer;
+    &.focus {
+      border: 1px solid #F66902;
+    }
+  }
+  .monitor-dag-arrow {
+    &.focus {
+      stroke: #F66902;
+    }
+  }
+  .butterflies-link-event-handler {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .monitor-canvas-action {
+    background: #333;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, .5);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 999;
+    border: 1px solid #676565;
+    div {
+      height: 24px;
+      width: 24px;
+      text-align: center;
+      line-height: 24px;
+      cursor: pointer;
+      color: #fff;
+      opacity: .7;
+      border-bottom: 1px solid #676565;
+      i {
+        -webkit-text-stroke-width: 0;
+        font-size: 14px;
+      }
+    }
+    div:hover{
+      background: #0f0f0f;
+    }
+    div:last-child {
+      border-bottom: none;
+    }
+  }
+  .status-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    .status-box {
+      margin-right: 15px;
+      .status-point {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #595959;
+        margin-right: 5px;
+        &.success {
+          background: #60bfc5;
+        }
+        &.fail {
+          background: #d6413f;
+        }
+        &.running {
+          background: #4b96ef;
+        }
+        &.waiting {
+          background: #6a40c6;
+        }
+        &.timeout {
+          background: #ffd544;
+        }
+      }
+      .status-text {
+        color: #fff;
+      }
+    }
+  }
+}

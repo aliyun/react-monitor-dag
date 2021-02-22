@@ -1,0 +1,28 @@
+@font-face {font-family: "monitor-icon";
+  src: url('//at.alicdn.com/t/font_2374781_7yvdp0wnrgj.eot?t=1613541855031'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_2374781_7yvdp0wnrgj.eot?t=1613541855031#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAQwAAsAAAAACIAAAAPjAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqEDINnATYCJAMQCwoABCAFhR0HSBuJB8geB+XGM2MLRXL+6uOhfr/f2XsXtab5z0/gnemEbNLEGpEkFjIlMB1CJ3sJ7yqnriyF5DCoBFaA2UnLhpOjGKTIcgEDrJm+AvQLK6Uv0ytUph+/Oi7L4/85ZrpooGF+GwB0hVCC1PNdROO9Iyhhuwd4hoFquvA4AfQKtx22VlBWB84IwXEBxBFr0IBzS4uYKQzOMI4jlybsDhw4lxvFY+A2//34h7lwBoVDFZy6vpOvh6wv4tsnvNXeCrtTBPCOM0O7ClSgDSSIvVHrBryMtuFIJ52QAHSH31GAL+KL9O2T3U78R5E60788EBRwEJ2C/H6ABYpV8EXETAJ8S0wK+P2kVRGd8u7N8VcA/6icPKbcET7rG0oQncHOUY+Ao+prsU/a1KurEbm/bnmZ3Fq/snK61PAos35QWmjT9oPv23L/KhLanhCklZ2ty2oSu5b75wB6E0rrvFIpLC1gWN/SO8v7PBSDx+6KoR0gkZHRR8kt+nKXAzLCu5y3ka5PvuTAwOign5/b8PiY3HhZ85MnDRfcq3U57fqyGWNuPcH67Cth4+ukJ5VocHZhLBWIj/sldWEFE2GFoblsc15oQdhExMpYFatZH144EV4QmseyI7eOn3xwXw7NDw35gWEe8arjLXRjI91yImJlrCrlBE/vaFSZD1Lx0kOk9fAJ8/HQGjyiw6I9DCyQWHQvkHXyfZk/laROsttXZTn5g/yBRu87r4LUKcBWoqKwjmuO9vOeqdd/unjOHpEUFy7gUshK2YkE59tlqqxX3x2Nc3oCk62p7cdz8elXr6YxFX/5kpghpvnrpvHirlguaFPfecwZD9DEL+G5ANR3xSpo4P9w2/9+GBy+PBD3eaT9cVZ+7qnPmsXXubtBgEwGfx5PzPuXecKRdAWBLtMWxlzPl6r8jScVoBcJNOAc9foI+YQ4n+DKr4bCyRqoXG1GJjYOOihlQSdXpdBrm4ar+/hoBxyWPUDLIAAm0DVQcPcEcIE+IQnsf3DgH37gKDC2AUkdubdU2hijZK6ANCLSU9rDFKvjLEy0j0iaOQsrcoKqs6oGGWwmjaC3cUiNBCuLM1Q0HTWUKEQWJBx5hvWAIUYUGYoRODNVsPvTkMnEUbzANSOdSDeJIp8SGcmMiWj8DDOQcgkQDRGiR9E6jMLS4VgwaVREMpfNLBFHoJr9ezUQAxsTDUHQ01i1GiKwYnF7lGi0KCGyUGoRd7zVu1gdYBBDJGJQGALEzSgFN29GTKGYYyk/bm6GOCqiNW0I81JEhpMYqZRmufmbX4JewccyStTI6OB0xXFmFWtxabFpLDxrMcQ49yKcTQQAAA==') format('woff2'),
+  url('//at.alicdn.com/t/font_2374781_7yvdp0wnrgj.woff?t=1613541855031') format('woff'),
+  url('//at.alicdn.com/t/font_2374781_7yvdp0wnrgj.ttf?t=1613541855031') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_2374781_7yvdp0wnrgj.svg?t=1613541855031#monitor-icon') format('svg'); /* iOS 4.1- */
+}
+
+.monitor-icon {
+  font-family: "monitor-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.monitor-icon-zoom-in:before {
+  content: "\e604";
+}
+
+.monitor-icon-quanping2:before {
+  content: "\e78b";
+}
+
+.monitor-icon-zoom-out:before {
+  content: "\e9e5";
+}
