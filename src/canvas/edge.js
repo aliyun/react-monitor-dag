@@ -2,6 +2,7 @@
 
 import {Edge} from 'butterfly-dag';
 import $ from 'jquery';
+import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import { Tips } from 'butterfly-dag';
 import RightMenuGen from './right-menu';
@@ -10,6 +11,11 @@ export default class BaseEdge extends Edge {
   mounted() {
     this._createRightMenu();
     this._createTips();
+    if (_.get(this, 'options.flow')) {
+      this.addAnimate({
+        color: '#4b96ef'
+      });
+    }
   }
   draw(obj) {
     let path = super.draw(obj);

@@ -43,7 +43,8 @@ export default {
     target: 2
   }, {
     source: 2,
-    target: 3
+    target: 3,
+    flow: true
   }, {
     source: 3,
     target: 4
