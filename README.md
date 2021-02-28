@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  <img width="100%" src="https://img.alicdn.com/imgextra/i4/O1CN01tbmIry23xWea1YcBQ_!!6000000007322-1-tps-1665-829.gif">
+  <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01nRgm2r1I0BOXGYq9a_!!6000000000830-1-tps-1665-826.gif">
 </p>
 
 ## ✨ 特性
@@ -17,6 +17,7 @@
 * 支持节点，锚点，线段label的tooltips
 * 支持节点，线段的右键菜单
 * 支持minimap，以及高亮状态
+* 支持线段流动动画
 
 ## 📦 安装
 ```

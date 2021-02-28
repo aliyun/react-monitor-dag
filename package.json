@@ -1,7 +1,7 @@
 {
   "name": "react-monitor-dag",
   "version": "1.0.0",
-  "description": "```js interface menu {   // 节点，线段的右键菜单   title?: string,   key: string,   width?: number,   primaryKey: boolean,   render?(data: any): void } interface config {   edge: {         // 定制线段的类型     type: string,     config: any   },   labelRender?(label: JSX.Element): void,  // 线段label的渲染方法   nodeRender?(data: any) :void,    // 节点的渲染方法   autoLayout: {     enable: boolean,   // 是否开启自动布局     isAlways: boolean, // 是否添加节点后就重新布局     type: string, // 算法类型     config: any   // 算法配置   },   minimap: {   // 是否开启缩略图     enable: boolean,     config: {       nodeColor: any     }   } } ```",
+  "description": "一个基于React的运维/监控DAG图",
   "main": "dist/index.js",
   "pack": "pack/index.js",
   "directories": {

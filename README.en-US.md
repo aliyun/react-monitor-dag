@@ -6,7 +6,7 @@ English| [简体中文](./README.md)
 
 
 <p align="center">
-  <img width="100%" src="https://img.alicdn.com/imgextra/i4/O1CN01tbmIry23xWea1YcBQ_!!6000000007322-1-tps-1665-829.gif">
+  <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01nRgm2r1I0BOXGYq9a_!!6000000000830-1-tps-1665-826.gif">
 </p>
 
 ## ✨ Feature
@@ -17,6 +17,7 @@ English| [简体中文](./README.md)
 * support the toolltips of  node, endpoint, edge's label
 * support right-click menu of nodes and edges
 * support minimap and highlight status
+* support edge flow animation
 
 ## 📦 Install
 ```

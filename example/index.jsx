@@ -53,6 +53,7 @@ ReactDOM.render((
           config={{
             // direction: 'left-right',
             labelRender: (label, info) => {
+              // return <span onClick={() => {console.log('1111')}}>{label}</span>;
               return label;
             },
             labelTipsRender: (label, info) => {
@@ -73,7 +74,10 @@ ReactDOM.render((
               enable: true,
               config: {
                 nodeColor: 'rgba(216, 216, 216, 0.13)',
-                activeNodeColor: '#F66902'
+                activeNodeColor: '#F66902',
+                viewportStyle: {
+                  'background-color': 'rgba(216, 216, 216, 0.07)'
+                }
               }
             },
           }}
