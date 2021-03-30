@@ -116,8 +116,9 @@ export default class ScheduleNode extends Node {
     let direction = _.get(this, 'options._config.direction', 'top-bottom');
     if (direction === 'left-right') {
       this.addEndpoint({
-        id: this.id + '-input',
+        // id: this.id + '-input',
         originId: this.id,
+        id: this.id,
         orientation: [-1,0],
         type: 'target',
         dom: $(this.dom).find('.left-point')[0],
@@ -125,7 +126,8 @@ export default class ScheduleNode extends Node {
         Class: Endpoint
       });
       this.addEndpoint({
-        id: this.id + '-output',
+        // id: this.id + '-output',
+        id: this.id,
         originId: this.id,
         orientation: [1,0],
         type: 'source',
@@ -135,7 +137,8 @@ export default class ScheduleNode extends Node {
       });
     } else {
       this.addEndpoint({
-        id: this.id + '-input',
+        // id: this.id + '-input',
+        id: this.id,
         originId: this.id,
         orientation: [0,-1],
         type: 'target',
@@ -144,7 +147,8 @@ export default class ScheduleNode extends Node {
         Class: Endpoint
       });
       this.addEndpoint({
-        id: this.id + '-output',
+        // id: this.id + '-output',
+        id: this.id,
         originId: this.id,
         orientation: [0,1],
         type: 'source',

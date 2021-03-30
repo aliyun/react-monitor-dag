@@ -7,7 +7,7 @@ import './index.less';
 import 'butterfly-dag/dist/index.css';
 import Canvas from './src/canvas/canvas';
 import Edge from './src/canvas/edge';
-
+import Group from './src/canvas/group';
 import {transformInitData, diffPropsData} from './src/adaptor';
 
 // 右键菜单配置
@@ -21,12 +21,14 @@ interface menu {
 // 画布配置
 interface config {
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
-  edge?: {         //定制线段的类型，todo需要思考
+  edge?: {        //定制线段的类型，todo需要思考
     type: string,
     config: any
   },
+  group: [],
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
   nodeRednder?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
+  paginationRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
   // todo: 宇行，需要在shouldComponentUpdate的时候判断
   autoLayout: {
     enable: boolean,   // 是否开启自动布局
@@ -34,7 +36,7 @@ interface config {
     type: string, // 算法类型
     config: any   // 算法配置
   },
-  minimap: {   // 是否开启缩略图
+  minimap: {  // 是否开启缩略图
     enable: boolean,
     config: {
       nodeColor: any
@@ -48,7 +50,7 @@ interface ComProps {
   height?: number | string,            // 组件高
   className?: string,                  // 组件classname
   nodeMenu: Array<menu>,               // 节点右键菜单配置
-  edgeMenu: Array<menu>,               // 线段右键菜单配置
+  edgeMenu: Array<menu>,            // 线段右键菜单配置
   config?: any,                        // 画布配置
   polling?: {                          // 支持轮训
     enable: boolean,
@@ -74,11 +76,13 @@ interface ComProps {
   onClickEdge?(edge: any): void,                 // 单击线段事件
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
+  onChangePage?(data:any): void,
 }
 
 export default class MonitorDag extends React.Component<ComProps, any> {
   protected canvas: any;
   protected canvasData: any;
+  protected group: any;
   private _timer: any;
   private _focusNodes: any;
   private _focusLinks: any;
@@ -136,12 +140,12 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       root: root,
       disLinkable: false,
       linkable: false,
-      draggable: false,
+      draggable: true,
       zoomable: true,
       moveable: true,
       theme: {
         edge: {
-          // todo
+          // todo,
           type: _.get(this, 'props.config.edge.type', 'AdvancedBezier'),
           isExpandWidth: true,
           arrow: _.get(this, 'props.config.edge.config.arrow', true),
@@ -149,6 +153,9 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           arrowOffset: _.get(this, 'props.config.edge.config.arrowPosition', -8),
           Class: Edge
         }
+      },
+      global: {
+        config: this.props.config
       }
     });
     this.canvas.draw(result, () => {
@@ -159,10 +166,12 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           'system.canvas.click'
         ]
       });
-
       if (minimap && minimap.enable) {
         this.canvas.setMinimap(true, minimapCfg);
       }
+    });
+    this.canvas.on('events', (data) => {
+      console.log(data);
     });
     this.canvasData = result;
 
@@ -197,12 +206,21 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     this.canvas.on('system.canvas.click', (data: any) => {
       this._unfocus();
     });
+
+    this.canvas.on('custom.group.pagenationClick', (data: any) => {
+      this.props.onChangePage && this.props.onChangePage(data.groups);
+    });
+
+    this.canvas.on('custom.group.searchValue', (data: any) => {
+      this.props.onSearch && this.props.onSearch(data);
+    });
+
+    
     
     // 检测轮训
     this._polling();
   }
   shouldComponentUpdate(newProps: ComProps, newState: any) {
-
     let result = transformInitData({
       config: this.props.config,
       nodeMenu: this.props.nodeMenu,
