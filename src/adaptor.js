@@ -8,13 +8,13 @@ import * as _ from 'lodash';
 export let transformInitData = (info) => {
   let {data, config, nodeMenu, edgeMenu, registerStatus} = info;
   // let current = data.groups[0].options.current
-  let {pageSize, current, defaultCurrent} = data.groups.length && data.groups[0].options;
+  let {pageSize, current, filterValue=''} = data.groups.length && data.groups[0].options;
   let _nodes;
   let _current;
   let groupNodes;
   let pageCount;
   if(data.groups && data.groups.length === 1 && data.groups[0].options.pageSize) {
-    groupNodes = data.nodes.filter(item => item.group === data.groups[0].id);
+    groupNodes = data.nodes.filter(item => item.group === data.groups[0].id && item.title.includes(filterValue) );
     if (current){
       _current =(current - 1) * pageSize
     }

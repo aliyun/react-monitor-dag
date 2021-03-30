@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom';
 import React from 'react';
 
 const getSearchValueFn = (value) => {
+  console.log(value,'ssssss');
   this.emit('custom.group.searchValue', {
     value
   });
@@ -27,17 +28,17 @@ class BaseGroup extends Group {
     
     let group = $(_dom);
     this._container = $('<div></div>')
-    .attr('class', 'aggregate');
+    .attr('class', 'butterflie-circle-group');
 
-    let _content = $('<div class="content"></div>');
-    let pagenation = $('<div class="content-pagenation"></div>')
-    let searchInput = $('<div class="content-searchInput"></div>')
+    let _content = $('<div class="butterflie-circle-group-content"></div>');
+    let pagenation = $('<div class="butterflie-circle-group-content-pagenation"></div>')
+    let searchInput = $('<div class="butterflie-circle-group-content-searchInput"></div>')
     
     group.append(_content)
     
     // 添加文字
     if (_.get(obj, 'options.title')) {
-      _content.append(`<span class="text">${obj.options.title}</span>`);
+      _content.append(`<span class="butterflie-circle-group-text">${obj.options.title}</span>`);
     }
     if(searchRender) {
       _content.append(searchInput);
@@ -50,12 +51,19 @@ class BaseGroup extends Group {
        e.stopPropagation();
        $('.ant-input').focus();
      })
-     searchInput.find('.ant-input').on('blur',(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      let value = $('.ant-input').val();
-      getSearchValueFn(value);
-    })
+      searchInput.find('.ant-input').on('blur',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let value = $('.ant-input').val();
+        getSearchValueFn(value);
+      })
+      searchInput.find('.ant-input-group-addon').on('click',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let value = $('.ant-input').val();
+        getSearchValueFn(value);
+      })
+    
    
    }
     if(paginationRender) {
