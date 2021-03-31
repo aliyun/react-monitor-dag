@@ -207,8 +207,28 @@
       background: #F66902;
       display: flex;
       justify-content: space-between;
-      .butterflie-circle-group-content-pagenation, .butterflie-circle-group-content-searchInput{
+      .butterflie-circle-group-content-pagenation{
         padding: 9px 0;
+        .ant-pagination{
+          float: right;
+          margin-right: 4px;
+          .ant-pagination-prev, .ant-pagination-next{
+            min-width: 12px;
+            margin: 0 4px;
+          }
+          .ant-pagination-simple-pager{
+            display: inline-block;
+            height: 24px;
+            margin-right: 0px;
+            >input {
+              width: 24px;
+              margin-right: 2px;
+            }
+            .ant-pagination-slash {
+              margin: 0 4px 0 4px;
+            }
+          }
+        }
       }
     }
     .butterflie-circle-group {

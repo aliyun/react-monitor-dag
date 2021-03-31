@@ -362,16 +362,18 @@ export default {
     options: {
       title: '测试',
       content: 'ssss',
-      current: 2,
+      current: 1,
       pageSize: 10,
-      minimapActive: true
+      isSearch: false,
+      filterValue: '算法'
     },
     top: 330,
     left: 200,
-    width: '500',
-    height: '300',
-    // resize: true,
-    // size: 2,
+    width: 500,
+    height: 300,
+    resize: true,
+    draggable: false,
+    size: 2,
     endpoints: [{
       id: 'left',
       orientation: [0, -1],

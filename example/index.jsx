@@ -13,48 +13,67 @@ import './index.less';
 const {Header} = Layout;
 const { Search } = Input;
 
+const nodeMenu = [{
+  key: 'detail',
+  title: '节点信息',
+  onClick: (key, data) => {
+    console.log('click detail info')
+  }
+}, {
+  key: 'run',
+  render: (key, data) => {
+    return <span>节点运行</span>
+  },
+  onClick: (key, data) => {
+    console.log('run node');
+  }
+}]
+
+const edgeMenu = [{
+  key: 'detail',
+  title: '线段信息',
+  onClick: (key, data) => {
+    console.log('click detail info',data)
+  }
+}, {
+  key: '监控流程',
+  render: (key, data) => {
+    return <span>监控流程</span>
+  },
+  onClick: (key, data) => {
+    console.log('monitor edge', data);
+  }
+}]
+
+const groupMenu = [{
+  key: 'detail',
+  title: '节点组信息',
+  onClick: (key, data) => {
+    console.log('click detail info')
+  }
+}, {
+  key: 'run',
+  render: (key, data) => {
+    return <span>节点运行</span>
+  },
+  onClick: (key, data) => {
+    console.log('run node');
+  }
+}]
+
 ReactDOM.render((
   <Router>
     <Layout>
       <Header className='header'>DTDesign-React运维/监控图</Header>
       <Layout>
-        <MonitorDag 
+        <MonitorDag
           data={mockData}
-          nodeMenu={[{
-            key: 'detail',
-            title: '节点信息',
-            onClick: (key, data) => {
-              console.log('click detail info')
-            }
-          }, {
-            key: 'run',
-            render: (key, data) => {
-              return <span>节点运行</span>
-            },
-            onClick: (key, data) => {
-              console.log('run node');
-            }
-          }]}
-          edgeMenu={[{
-            key: 'detail',
-            title: '线段信息',
-            onClick: (key, data) => {
-              console.log('click detail info')
-            }
-          }, {
-            key: '监控流程',
-            render: (key, data) => {
-              return <span>监控流程</span>
-            },
-            onClick: (key, data) => {
-              console.log('monitor edge');
-            }
-          }]}
+          nodeMenu={nodeMenu}
+          edgeMenu={edgeMenu}
+          groupMenu={groupMenu}
           config={{
             // direction: 'left-right',
-            // current:1,
             labelRender: (label, info) => {
-              // return <span onClick={() => {console.log('1111')}}>{label}</span>;
               return label;
             },
             labelTipsRender: (label, info) => {
@@ -71,17 +90,7 @@ ReactDOM.render((
             endpointTipsRender: (pointOpts) => {
               return <span>自定义锚点tips</span>
             },
-            paginationRender: (curr, total, pageSize) => {
-              return  <Pagination 
-                        simple 
-                        current={curr} 
-                        total={total} 
-                        pageSize={pageSize} 
-                        />;
-            },
-            searchRender: (value) => {
-              return <Search placeholder="请输入" style={{ width: 100 }} size="small" />
-            },
+            // paginationRender: true, 
             minimap: {
               enable: true,
               config: {

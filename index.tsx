@@ -51,6 +51,7 @@ interface ComProps {
   className?: string,                  // 组件classname
   nodeMenu: Array<menu>,               // 节点右键菜单配置
   edgeMenu: Array<menu>,            // 线段右键菜单配置
+  groupMenu: Array<menu>,              // group右键配置
   config?: any,                        // 画布配置
   polling?: {                          // 支持轮训
     enable: boolean,
@@ -76,6 +77,7 @@ interface ComProps {
   onClickEdge?(edge: any): void,                 // 单击线段事件
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
+  onContextmenuGroup?(edge: any): void,           // 右键线段事件
   onChangePage?(data:any): void,
 }
 
@@ -133,6 +135,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       config: this.props.config,
       nodeMenu: this.props.nodeMenu,
       edgeMenu: this.props.edgeMenu,
+      groupMenu: this.props.groupMenu,
       data: _.cloneDeep(this.props.data),
       registerStatus: _.cloneDeep(this.props.registerStatus)
     });
@@ -215,6 +218,11 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       this.props.onSearch && this.props.onSearch(data);
     });
 
+    this.canvas.on('custom.groups.rightClick', (data: any) => {
+      this.props.onContextmenuGroup && this.props.onContextmenuGroup(data.groups);
+    });
+    
+
     
     
     // 检测轮训
@@ -225,6 +233,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       config: this.props.config,
       nodeMenu: this.props.nodeMenu,
       edgeMenu: this.props.edgeMenu,
+      groupMenu: this.props.groupMenu,
       data: _.cloneDeep(newProps.data),
       registerStatus: _.cloneDeep(newProps.registerStatus)
     });

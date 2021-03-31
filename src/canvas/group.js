@@ -3,12 +3,27 @@ import $ from 'jquery';
 import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
-
+import RightMenuGen from './right-menu';
+import {Layout, Pagination, Input} from 'antd';
+const { Search } = Input;
 const getSearchValueFn = (value) => {
   console.log(value,'ssssss');
   this.emit('custom.group.searchValue', {
     value
   });
+}
+
+const renderPagenation = (data) => {
+  const {current, total, pageSize, isSearch} = data;
+  return <React.Fragment>
+  {isSearch ? <Search placeholder="请输入" style={{ width: 100 }} size="small" /> : null}  
+  <Pagination
+    simple
+    current={current}
+    total={total} 
+    pageSize={pageSize}
+  />
+</React.Fragment>
 }
 
 class BaseGroup extends Group {
@@ -21,8 +36,8 @@ class BaseGroup extends Group {
         .attr('class', 'group')
         .css('top', obj.top)
         .css('left', obj.left)
-        .css('width', obj.width)
-        .css('height', obj.height)
+        .css('width', obj.width + 'px')
+        .css('height', obj.height + 'px')
         .attr('id', obj.id);
     }
     
@@ -32,44 +47,16 @@ class BaseGroup extends Group {
 
     let _content = $('<div class="butterflie-circle-group-content"></div>');
     let pagenation = $('<div class="butterflie-circle-group-content-pagenation"></div>')
-    let searchInput = $('<div class="butterflie-circle-group-content-searchInput"></div>')
     
     group.append(_content)
-    
     // 添加文字
     if (_.get(obj, 'options.title')) {
       _content.append(`<span class="butterflie-circle-group-text">${obj.options.title}</span>`);
     }
-    if(searchRender) {
-      _content.append(searchInput);
-      ReactDOM.render(
-        searchRender(),
-        searchInput[0]
-      );
-     searchInput.find('.ant-input').on('click',(e) => {
-       e.preventDefault();
-       e.stopPropagation();
-       $('.ant-input').focus();
-     })
-      searchInput.find('.ant-input').on('blur',(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        let value = $('.ant-input').val();
-        getSearchValueFn(value);
-      })
-      searchInput.find('.ant-input-group-addon').on('click',(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        let value = $('.ant-input').val();
-        getSearchValueFn(value);
-      })
-    
-   
-   }
-    if(paginationRender) {
+    if(obj.options.pageSize) {
       _content.append(pagenation);
       ReactDOM.render(
-        paginationRender(this.options.current,this.options.total, this.options.pageSize),
+        renderPagenation(this.options),
         pagenation[0]
       );
       pagenation.find('.ant-pagination-prev').on('click', (e) => {
@@ -88,6 +75,24 @@ class BaseGroup extends Group {
           groups: this
         });
       });
+
+      pagenation.find('.ant-input').on('click',(e) => {
+       e.preventDefault();
+       e.stopPropagation();
+       $('.ant-input').focus();
+     })
+      pagenation.find('.ant-input').on('blur',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let value = $('.ant-input').val();
+        getSearchValueFn(value);
+      })
+      pagenation.find('.ant-input-group-addon').on('click',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let value = $('.ant-input').val();
+        getSearchValueFn(value);
+      })
       
       // pagenation.find('.ant-pagination-next').on('click', (e) => {
       //   e.preventDefault();
@@ -105,6 +110,26 @@ class BaseGroup extends Group {
     
 
     return _dom;
+  }
+
+  mounted() {
+    // 生成右键菜单
+    this._createRightMenu();
+  }
+
+   // 生成右键菜单
+   _createRightMenu() {
+     let menus = _.get(this, 'options._menu', []);
+    if (menus.length > 0) {
+      $(this.dom).contextmenu((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        RightMenuGen(this.dom, 'groups', [e.clientX, e.clientY], menus, this.options);
+        this.emit('custom.groups.rightClick', {
+          groups: this
+        });
+      })
+    }
   }
   // drawArrow(isShow) {
   //   let dom = super.drawArrow(isShow);
