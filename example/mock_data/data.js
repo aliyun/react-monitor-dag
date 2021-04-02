@@ -318,8 +318,68 @@ export default {
       className: 'icon-background-color',
       iconType: 'icon-guanlian',
       top: 205,
-      left: 300,
-      group: 'group',
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '123',
+      title: '交运算tt1',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '124',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '125',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '126',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
       status: 'success',
       endpoints: [{
         id: 'top',
@@ -356,15 +416,44 @@ export default {
       type: 'endpoint',
       arrowPosition: 0.5,
     },
+    {
+      source: 'bottom',
+      target: 'left',
+      sourceNode: 'group',
+      targetNode: 'group1',
+      arrow: true,
+      type: 'endpoint',
+      arrowPosition: 0.5,
+    },
   ],
   groups: [{
+    id: 'group1',
+    options: {
+      title: '测试',
+      current: 1,
+      pageSize: 10,
+      isSearch: true,
+      filterValue: ''
+    },
+    top: 730,
+    left: 200,
+    width: 500,
+    height: 300,
+    resize: true,
+    draggable: false,
+    size: 2,
+    endpoints: [{
+      id: 'left',
+      orientation: [0, -1],
+      pos: [0.5, 0],
+    }]
+  },{
     id: 'group',
     options: {
       title: '测试',
-      content: 'ssss',
       current: 1,
       pageSize: 10,
-      isSearch: false,
+      isSearch: true,
       filterValue: '算法'
     },
     top: 330,

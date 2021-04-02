@@ -7,20 +7,20 @@ import RightMenuGen from './right-menu';
 import {Layout, Pagination, Input} from 'antd';
 const { Search } = Input;
 const getSearchValueFn = (value) => {
-  console.log(value,'ssssss');
+  console.log(value);
   this.emit('custom.group.searchValue', {
     value
   });
 }
 
 const renderPagenation = (data) => {
-  const {current, total, pageSize, isSearch} = data;
+  const {current, total, pageSize, isSearch, filterValue} = data.options;
   return <React.Fragment>
-  {isSearch ? <Search placeholder="请输入" style={{ width: 100 }} size="small" /> : null}  
+  {isSearch ? <Search placeholder="请输入" style={{ width: 100 }} size="small" value={filterValue} id={data.id} /> : null}  
   <Pagination
     simple
     current={current}
-    total={total} 
+    total={total}
     pageSize={pageSize}
   />
 </React.Fragment>
@@ -44,9 +44,8 @@ class BaseGroup extends Group {
     let group = $(_dom);
     this._container = $('<div></div>')
     .attr('class', 'butterflie-circle-group');
-
     let _content = $('<div class="butterflie-circle-group-content"></div>');
-    let pagenation = $('<div class="butterflie-circle-group-content-pagenation"></div>')
+    let pagenation = $(`<div class="butterflie-circle-group-content-pagenation"></div>`)
     
     group.append(_content)
     // 添加文字
@@ -56,7 +55,7 @@ class BaseGroup extends Group {
     if(obj.options.pageSize) {
       _content.append(pagenation);
       ReactDOM.render(
-        renderPagenation(this.options),
+        renderPagenation(this),
         pagenation[0]
       );
       pagenation.find('.ant-pagination-prev').on('click', (e) => {
@@ -76,21 +75,26 @@ class BaseGroup extends Group {
         });
       });
 
-      pagenation.find('.ant-input').on('click',(e) => {
+      pagenation.find(`input[id=${this.id}]`).on('click',(e) => {
        e.preventDefault();
        e.stopPropagation();
-       $('.ant-input').focus();
+       $(`input[id=${this.id}]`).focus();
      })
-      pagenation.find('.ant-input').on('blur',(e) => {
+     pagenation.find(`input[id=${this.id}]`).on('input',(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      $(`input[id=${this.id}]`).val();
+    })
+      pagenation.find(`input[id=${this.id}]`).on('blur',(e) => {
         e.preventDefault();
         e.stopPropagation();
-        let value = $('.ant-input').val();
+        let value = $(`input[id=${this.id}]`).val();
         getSearchValueFn(value);
       })
       pagenation.find('.ant-input-group-addon').on('click',(e) => {
         e.preventDefault();
         e.stopPropagation();
-        let value = $('.ant-input').val();
+        let value = $(`input[id=${this.id}]`).val();
         getSearchValueFn(value);
       })
       

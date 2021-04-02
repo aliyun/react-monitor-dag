@@ -25,30 +25,36 @@ const nodePositionFn = (data, pageData) => {
 
 export let transformInitData = (info) => {
   let {data, config, nodeMenu, edgeMenu,groupMenu, registerStatus} = info;
-  // let current = data.groups[0].options.current
-  let {pageSize, current, filterValue='', isSearch} = data.groups.length && data.groups[0].options;
-  let _nodes;
-  let _current;
-  let groupNodes;
-  let pageCount;
-  if(data.groups && data.groups.length === 1 && data.groups[0].options.pageSize) {
-    groupNodes = data.nodes.filter(item => item.group === data.groups[0].id && item.title.includes(filterValue));
-    if (current){
-      _current =(current - 1) * pageSize
-    }
-    let total = groupNodes.length;
-    let pageData = null;
-    pageCount=Math.ceil(total/pageSize)
-    // 当点击2的时候如果第二页是最后一页进入else全部展示
-    if (total > current + pageSize) {
-      pageData = groupNodes.slice(_current, _current + pageSize);
-    } else {
-      pageData = groupNodes.slice(_current, groupNodes.length);
-    }
-    pageData = nodePositionFn(data.groups[0], pageData);
-    _nodes = data.nodes.filter(item => !item.group)
-    
-    _nodes.push(...pageData);
+  let _nodes = data.nodes.filter(item => !item.group);
+  let pageData = null;
+  if(data.groups && data.groups.length > 0) {
+    data.groups.map(item => {
+      let _current;
+      let {pageSize, current, filterValue='', isSearch, total} = item.options;
+      const groupNodes = data.nodes.filter(nodeItem => {
+        return nodeItem.group === item.id && nodeItem.title.includes(filterValue)
+      });
+      if (current){
+        _current = (current - 1) * pageSize
+      }
+      let _total = total || groupNodes.length;
+      // 当点击2的时候如果第二页是最后一页进入else全部展示
+      if (_total > current + pageSize) {
+        pageData = groupNodes.slice(_current, _current + pageSize);
+      } else {
+        pageData = groupNodes.slice(_current, groupNodes.length);
+      }
+      pageData = nodePositionFn(item, pageData); // 计算位置
+      _nodes.push(...pageData);
+      item.options = {
+        ...item.options,
+        title: '共' + groupNodes.length + '个节点',
+        total: _total,
+        pageSize,
+        current,
+      }
+      return item;
+    })
   } else {
     _nodes = data.nodes
   }
@@ -78,11 +84,6 @@ export let transformInitData = (info) => {
     return _.assign(item, {
       options: {
         ...item.options,
-        title: '共' + groupNodes.length + '个节点',
-        total: groupNodes.length,
-        pageSize,
-        current,
-        pageCount,
         _menu: groupMenu,
       },
       Class: Group,

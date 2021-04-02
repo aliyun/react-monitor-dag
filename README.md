@@ -97,6 +97,7 @@ interface props {
   className?: string,                  // 组件classname
   nodeMenu: Array<menu>,               // 节点右键菜单配置
   edgeMenu: Array<menu>,               // 线段右键菜单配置
+  groupMenu: Array<menu>,              // group右键配置
   config?: any,                        // 画布配置
   polling?: {                          // 支持轮训
     enable: boolean,
@@ -122,6 +123,8 @@ interface props {
   onClickEdge?(edge: any): void,                 // 单击线段事件
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
+  onContextmenuGroup?(edge: any): void,           // 右键节点组事件
+  onChangePage?(data:any): void,                  // 点击分页时间
 }
 ```
 

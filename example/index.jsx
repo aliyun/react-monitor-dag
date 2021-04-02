@@ -90,7 +90,6 @@ ReactDOM.render((
             endpointTipsRender: (pointOpts) => {
               return <span>自定义锚点tips</span>
             },
-            // paginationRender: true, 
             minimap: {
               enable: true,
               config: {
@@ -103,9 +102,6 @@ ReactDOM.render((
                 nodes: mockData.nodes
               }
             },
-          }}
-          onChangePage={(data) => {
-             mockData.groups[0].options = data.options
           }}
         />
       </Layout>

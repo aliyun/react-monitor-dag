@@ -19,7 +19,7 @@
   "author": "无惟",
   "license": "MIT",
   "dependencies": {
-    "butterfly-dag": "~3.1.4"
+    "butterfly-dag": "~3.2.5"
   },
   "peerDependencies": {
     "react": ">15.6.1",
