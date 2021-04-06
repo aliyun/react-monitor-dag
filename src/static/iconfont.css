@@ -15,6 +15,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.monitor-icon-sousuo:before {
+  content: "\e607";
+}
+
+.monitor-icon-left:before {
+  content: "\e606";
+}
+
+.monitor-icon-right:before {
+  content: "\e605";
+}
+
 .monitor-icon-zoom-in:before {
   content: "\e604";
 }

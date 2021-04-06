@@ -4,33 +4,28 @@ import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
 import RightMenuGen from './right-menu';
-import {Layout, Pagination, Input} from 'antd';
-const { Search } = Input;
+import {LeftCircleTwoTone , RightCircleTwoTone} from '@ant-design/icons';
 const getSearchValueFn = (value) => {
-  console.log(value);
   this.emit('custom.group.searchValue', {
     value
   });
 }
 
 const renderPagenation = (data) => {
-  const {current, total, pageSize, isSearch, filterValue} = data.options;
+  const {current, total, pageSize, isSearch, filterValue, pageCount} = data.options;
   return <React.Fragment>
-  {isSearch ? <Search placeholder="请输入" style={{ width: 100 }} size="small" value={filterValue} id={data.id} /> : null}  
-  <Pagination
-    simple
-    current={current}
-    total={total}
-    pageSize={pageSize}
-  />
+  {isSearch ? <input placeholder="请输入" className="group-search-input" value={filterValue} id={data.id} /> : null}  
+  <div className="group-pagination-wrap">
+    <LeftCircleTwoTone className="group-pagination-wrap-prev"  twoToneColor="#545050" />
+    <span className="group-pagination-wrap-pager" >{current}/{pageCount}</span>
+    <RightCircleTwoTone className="group-pagination-wrap-next" twoToneColor="#545050" />
+  </div>
 </React.Fragment>
 }
 
 class BaseGroup extends Group {
   draw(obj) {
     let _dom = obj.dom;
-    let paginationRender = _.get(this, '_global.config.paginationRender');
-    let searchRender = _.get(this, '_global.config.searchRender');
     if (!_dom) {
       _dom = $('<div></div>')
         .attr('class', 'group')
@@ -58,33 +53,33 @@ class BaseGroup extends Group {
         renderPagenation(this),
         pagenation[0]
       );
-      pagenation.find('.ant-pagination-prev').on('click', (e) => {
+      pagenation.find('.group-pagination-wrap-prev').on('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.options.current = this.options.current === 1 ? 1 : this.options.current - 1
+        obj.options.current = obj.options.current === 1 ? 1 : obj.options.current - 1
         this.emit('custom.group.pagenationClick', {
-          groups: this
+          groups: obj
         });
       });
-      pagenation.find('.ant-pagination-next').on('click', (e) => {
+      pagenation.find('.group-pagination-wrap-next').on('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.options.current = this.options.current === this.options.pageCount ? this.options.pageCount : this.options.current + 1
+        obj.options.current = obj.options.current === obj.options.pageCount ? obj.options.pageCount : obj.options.current + 1
         this.emit('custom.group.pagenationClick', {
-          groups: this
+          groups: obj
         });
       });
 
       pagenation.find(`input[id=${this.id}]`).on('click',(e) => {
-       e.preventDefault();
-       e.stopPropagation();
-       $(`input[id=${this.id}]`).focus();
-     })
+        e.preventDefault();
+        e.stopPropagation();
+        $(`input[id=${this.id}]`).focus();
+      })
      pagenation.find(`input[id=${this.id}]`).on('input',(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      $(`input[id=${this.id}]`).val();
-    })
+        e.preventDefault();
+        e.stopPropagation();
+        $(`input[id=${this.id}]`).val();
+      })
       pagenation.find(`input[id=${this.id}]`).on('blur',(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -97,16 +92,6 @@ class BaseGroup extends Group {
         let value = $(`input[id=${this.id}]`).val();
         getSearchValueFn(value);
       })
-      
-      // pagenation.find('.ant-pagination-next').on('click', (e) => {
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      //   console.log(this, '333');
-      //   this.options.current = this.options.current === this.options.pageCount ? this.options.pageCount : this.options.current + 1
-      //   this.emit('custom.group.pagenationClick', {
-      //     group: this
-      //   });
-      // });
    }
 
     group.append(this._container);

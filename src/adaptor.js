@@ -38,6 +38,7 @@ export let transformInitData = (info) => {
         _current = (current - 1) * pageSize
       }
       let _total = total || groupNodes.length;
+      let pageCount = Math.ceil(_total / pageSize);
       // 当点击2的时候如果第二页是最后一页进入else全部展示
       if (_total > current + pageSize) {
         pageData = groupNodes.slice(_current, _current + pageSize);
@@ -52,6 +53,7 @@ export let transformInitData = (info) => {
         total: _total,
         pageSize,
         current,
+        pageCount
       }
       return item;
     })
@@ -131,6 +133,7 @@ export let diffPropsData = (newData, oldData) => {
       });
     }
   });
+
   return {
     addNodes,
     rmNodes,

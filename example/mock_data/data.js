@@ -373,7 +373,7 @@ export default {
       }]
     },
     {
-      id: '126',
+      id: '127',
       title: '交运算tt',
       className: 'icon-background-color',
       iconType: 'icon-guanlian',
@@ -387,6 +387,111 @@ export default {
         pos: [0.5, 0]
       }]
     },
+    {
+      id: '128',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '129',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '130',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '131',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '132',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '133',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '134',
+      title: '交运算tt',
+      className: 'icon-background-color',
+      iconType: 'icon-guanlian',
+      top: 205,
+      left: 400,
+      group: 'group1',
+      status: 'success',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      }]
+    }
   ],
   edges: [
     {
@@ -427,15 +532,15 @@ export default {
     },
   ],
   groups: [{
-    id: 'group1',
+    id: 'group',
     options: {
       title: '测试',
       current: 1,
       pageSize: 10,
       isSearch: true,
-      filterValue: ''
+      filterValue: '算法'
     },
-    top: 730,
+    top: 330,
     left: 200,
     width: 500,
     height: 300,
@@ -448,15 +553,15 @@ export default {
       pos: [0.5, 0],
     }]
   },{
-    id: 'group',
+    id: 'group1',
     options: {
       title: '测试',
       current: 1,
       pageSize: 10,
       isSearch: true,
-      filterValue: '算法'
+      filterValue: ''
     },
-    top: 330,
+    top: 730,
     left: 200,
     width: 500,
     height: 300,
