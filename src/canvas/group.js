@@ -4,7 +4,6 @@ import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
 import RightMenuGen from './right-menu';
-import {LeftCircleTwoTone , RightCircleTwoTone} from '@ant-design/icons';
 const getSearchValueFn = (value) => {
   this.emit('custom.group.searchValue', {
     value
@@ -16,9 +15,9 @@ const renderPagenation = (data) => {
   return <React.Fragment>
   {isSearch ? <input placeholder="请输入" className="group-search-input" value={filterValue} id={data.id} /> : null}  
   <div className="group-pagination-wrap">
-    <LeftCircleTwoTone className="group-pagination-wrap-prev"  twoToneColor="#545050" />
+    <i className="monitor-icon monitor-icon-left-circle group-pagination-wrap-prev"></i>
     <span className="group-pagination-wrap-pager" >{current}/{pageCount}</span>
-    <RightCircleTwoTone className="group-pagination-wrap-next" twoToneColor="#545050" />
+    <i className="monitor-icon monitor-icon-right-circle group-pagination-wrap-next"></i>
   </div>
 </React.Fragment>
 }
