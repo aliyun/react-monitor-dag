@@ -124,7 +124,7 @@ interface props {
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
   onContextmenuGroup?(edge: any): void,           // 右键节点组事件
-  onChangePage?(data:any): void,                  // 点击分页时间
+  onChangePage?(data:any): void,                  // 点击分页事件
 }
 ```
 

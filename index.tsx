@@ -153,9 +153,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           arrowOffset: _.get(this, 'props.config.edge.config.arrowPosition', -8),
           Class: Edge
         }
-      },
-      global: {
-        config: this.props.config
       }
     });
     this.canvas.draw(result, () => {
@@ -208,8 +205,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
 
     this.canvas.on('custom.group.pagenationClick', (data: any) => {
-      this.props.data.groups[0].options = data.groups.options;
-      console.log('sssssssssssss', data,  this.props.data);
       this.props.onChangePage && this.props.onChangePage(data.groups);
     });
 

@@ -1,63 +1,4 @@
-// 'use strict';
-
-// export default {
-//   nodes: [{
-//     id: 1,
-//     top: 50,
-//     left: 500,
-//     title: '任务1',
-//     status: 'success'
-//   }, {
-//     id: 2,
-//     top: 150,
-//     left: 500,
-//     title: '任务2',
-//     status: 'running'
-//   }, {
-//     id: 3,
-//     top: 250,
-//     left: 500,
-//     title: '任务3',
-//     status: 'waiting'
-//   }, {
-//     id: 4,
-//     top: 350,
-//     left: 500,
-//     title: '任务4',
-//     status: 'timeout'
-//   }, {
-//     id: 5,
-//     top: 450,
-//     left: 500,
-//     title: '任务5',
-//     status: 'fail'
-//   }, {
-//     id: 6,
-//     top: 550,
-//     left: 500,
-//     title: '自定义',
-//     status: 'other'
-//   }],
-//   edges: [{
-//     source: 1,
-//     target: 2
-//   }, {
-//     source: 2,
-//     target: 3,
-//     flow: true
-//   }, {
-//     source: 3,
-//     target: 4
-//   }, {
-//     source: 4,
-//     target: 5
-//   }, {
-//     source: 5,
-//     target: 6,
-//     label: 'test label'
-//   }]
-// }
-
+'use strict';
 export default {
   nodes: [
     {
@@ -68,11 +9,6 @@ export default {
       top: 50,
       left: 400,
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '2',
@@ -82,11 +18,6 @@ export default {
       top: 150,
       left: 400,
       status: 'running',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '3',
@@ -97,6 +28,10 @@ export default {
       left: 400,
       status: 'timeout',
       endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      },{
         id: 'bottom',
         orientation: [0, 1],
         pos: [0.5, 0]
@@ -111,11 +46,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '17',
@@ -126,11 +56,6 @@ export default {
       left: 150,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '18',
@@ -141,11 +66,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '4',
@@ -156,11 +76,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '5',
@@ -171,11 +86,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '6',
@@ -186,11 +96,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '7',
@@ -201,11 +106,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '8',
@@ -216,11 +116,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '9',
@@ -231,11 +126,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '10',
@@ -246,11 +136,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '11',
@@ -261,11 +146,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '12',
@@ -276,11 +156,6 @@ export default {
       left: 50,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '13',
@@ -291,11 +166,6 @@ export default {
       left: 300,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'bottom',
-        orientation: [0, 1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '15',
@@ -306,11 +176,6 @@ export default {
       left: 300,
       group: 'group',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '122',
@@ -321,11 +186,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '123',
@@ -336,11 +196,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '124',
@@ -351,11 +206,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '125',
@@ -366,11 +216,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '127',
@@ -381,11 +226,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '128',
@@ -396,11 +236,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '129',
@@ -411,11 +246,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '130',
@@ -426,11 +256,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '131',
@@ -441,11 +266,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '132',
@@ -456,11 +276,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '133',
@@ -471,11 +286,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     },
     {
       id: '134',
@@ -486,11 +296,6 @@ export default {
       left: 400,
       group: 'group1',
       status: 'success',
-      endpoints: [{
-        id: 'top',
-        orientation: [0, -1],
-        pos: [0.5, 0]
-      }]
     }
   ],
   edges: [
@@ -514,7 +319,7 @@ export default {
     },
     {
       source: 'bottom',
-      target: 'left',
+      target: 'groupTop',
       sourceNode: '3',
       targetNode: 'group',
       arrow: true,
@@ -522,8 +327,8 @@ export default {
       arrowPosition: 0.5,
     },
     {
-      source: 'bottom',
-      target: 'left',
+      source: 'groupBottom',
+      target: 'top',
       sourceNode: 'group',
       targetNode: 'group1',
       arrow: true,
@@ -545,11 +350,15 @@ export default {
     width: 500,
     height: 300,
     resize: true,
-    draggable: false,
+    // draggable: false,
     size: 2,
     endpoints: [{
-      id: 'left',
+      id: 'groupTop',
       orientation: [0, -1],
+      pos: [0.5, 0],
+    },{
+      id: 'groupBottom',
+      orientation: [0, 1],
       pos: [0.5, 0],
     }]
   },{
@@ -566,10 +375,10 @@ export default {
     width: 500,
     height: 300,
     resize: true,
-    draggable: false,
+    // draggable: false,
     size: 2,
     endpoints: [{
-      id: 'left',
+      id: 'top',
       orientation: [0, -1],
       pos: [0.5, 0],
     }]
