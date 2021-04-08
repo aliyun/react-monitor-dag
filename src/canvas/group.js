@@ -12,14 +12,14 @@ const getSearchValueFn = (value) => {
 
 const renderPagenation = (data) => {
   const {current, total, pageSize, isSearch, filterValue, pageCount} = data.options;
-  return <React.Fragment>
+  return <div>
   {isSearch ? <input placeholder="请输入" className="group-search-input" value={filterValue} id={data.id} /> : null}  
   <div className="group-pagination-wrap">
     <i className="monitor-icon monitor-icon-left-circle group-pagination-wrap-prev"></i>
     <span className="group-pagination-wrap-pager" >{current}/{pageCount}</span>
     <i className="monitor-icon monitor-icon-right-circle group-pagination-wrap-next"></i>
   </div>
-</React.Fragment>
+</div>
 }
 
 class BaseGroup extends Group {
