@@ -75,7 +75,8 @@ interface ComProps {
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
   onContextmenuGroup?(edge: any): void,           // 右键线段事件
-  onChangePage?(data:any): void,
+  onChangePage?(data:any): void,                 // 分页事件
+  onGroupSearch?(data:any): void                 // 搜索
 }
 
 export default class MonitorDag extends React.Component<ComProps, any> {
@@ -209,7 +210,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
 
     this.canvas.on('custom.group.searchValue', (data: any) => {
-      this.props.onSearch && this.props.onSearch(data);
+      this.props.onGroupSearch && this.props.onGroupSearch(data);
     });
 
     this.canvas.on('custom.groups.rightClick', (data: any) => {

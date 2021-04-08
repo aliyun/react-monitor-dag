@@ -36,7 +36,9 @@ npm install react-monitor-dag
 |       height      |                          component height                         |        <font color="c41d7f">number &#124; string </font>        |                                    -                                    |
 |     className     |                        component className                        |                <font color="c41d7f">string</font>               |                                    -                                    |
 |      nodeMenu     |                Node Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; </font> |                                   [ ]                                   |
-|      edgeMenu     |                Edge Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; </font> |                                   [ ]                                   |
+|      edgeMenu     |                Edge Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu]
+|      groupMenu     |                Group Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu]
+(#menu-type)&#62; </font> |                                   [ ]                                   |
 |       config      |             As configured above[config Prop](#config)             |                 <font color="c41d7f">any </font>                |                                    -                                    |
 |      polling      |              support polling[polling Prop](#polling)              |                <font color="c41d7f">object</font>               |                                   { }                                   |
 |   registerStatus  | Register status, which adds class to the node based on its status |                <font color="c41d7f">object</font>               | key:value, registered by user, corresponded to the status field of node |
@@ -47,9 +49,13 @@ npm install react-monitor-dag
 |    onClickEdge    |                      Single Click Edge Event                      |            <font color="c41d7f">(edge) => void</font>           |                                    -                                    |
 |    onClickLabel   |                      Single Click Label Event                     |        <font color="c41d7f">(label, edge) => void</font>        |                                    -                                    |
 | onContextmenuEdge |                       Right-Click Edge Event                      |            <font color="c41d7f">(edge) => void</font>           |                                    -                                    |
+| onContextmenuGroup |                       Right-Click Group Event                      |            <font color="c41d7f">(data) => void</font>           |  
+| onChangePage |                             Single-Click Group Pagination Event                      |            <font color="c41d7f">(data) => void</font>           | 
+| onGroupSearch |                             Out of Focus Event Event                      |            <font color="c41d7f">(data) => void</font>           | 
+
+
 
 <br>
-
 ### <a name='menu-type'></a><b>menu</b>
 
 right-click menu configuration for'Node/Edge'
@@ -157,11 +163,15 @@ import 'react-monitor-dag/dist/index.css';
   data={data}
   nodeMenu={menu}                   // Node Right-click Menu Configuration
   edgeMenu={menu}                   // Edge Right-click Menu Configuration
+  groupMenu={menu}                   // Group Right-click Menu Configuration
   onClickNode={(node) => {}}        // Single Click Node Event
   onContextmenuNode={(node) => {}}  // Right Click Node Event
   onDblClickNode={(node) => {}}     // Double Click Node Event
   onClickEdge={(edge) => {}}        // Single Click Edge Event
   onContextmenuEdge={(edge) => {}}  // Right Click Edge Event
+  onContextmenuGroup={(data) => {}}   // Right Click Group Event
+  onChangePage={(data) => {}}        // Single Click Group Pagination Event
+  onGroupSearch={(data) => {}}        // Out of Focus Event
   polling={{                        // support polling
     enable: true,
     interval: 5000,                 // interval of polling 
@@ -224,6 +234,7 @@ interface props {
     className ? : string, // component className
     nodeMenu: Array < menu > , // Node Right-click Menu Configuration
     edgeMenu: Array < menu > , // Edge Right-click Menu Configuration
+    groupMenu: Array < menu > , // Group Right-click Menu Configuration
     config ? : any, // As configured above
     polling ? : { // support polling
       enable: boolean,
@@ -248,6 +259,9 @@ interface props {
     onClickEdge ? (edge: any) : void, // Single Click Edge Event
     onClickLabel ? (label: string, edge: any) : void, // Single Click Label Event
     onContextmenuEdge ? (edge: any) : void, // Right-Click Edge Event
+    onContextmenuGroup?(edge: any): void,   // Right-Click Group Event
+    onChangePage?(data:any): void,          // Single-Click Group Pagination Event
+    onGroupSearch?(data:any): void  //  Out of Focus Event 
 }
 ```
 
