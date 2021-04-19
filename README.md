@@ -49,7 +49,7 @@ npm install react-monitor-dag
 | onContextmenuEdge |                    右键线段事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
 | onContextmenuGroup |                    右键group事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
 | onChangePage |                    单击group分页事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
-| onGroupSearch |                    表单失焦事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
+                    -                         |
 
 <br>
 
@@ -167,7 +167,6 @@ import 'react-monitor-dag/dist/index.css';
   onContextmenuEdge={(edge) => {}}  // Right Click Edge Event
    onContextmenuGroup={(data) => {}}   // Right Click Group Event
   onChangePage={(data) => {}}        // Single Click Group Pagination Event
-  onGroupSearch={(data) => {}}        // Out of Focus Event
   polling={{                        // support polling
     enable: true,
     interval: 5000,                 // interval of polling 
@@ -256,8 +255,7 @@ interface props {
     onClickLabel ? (label: string, edge: any) : void, //单击label的事件
     onContextmenuEdge ? (edge: any) : void, // 右键线段事件
     onContextmenuGroup?(edge: any): void,   // 右键group事件
-    onChangePage?(data:any): void,          // 单击分页事件
-    onGroupSearch?(data:any): void  //  表单失焦事件
+    onChangePage?(data:any): void,          // 单击分页事件&搜索
 }
 ```
 

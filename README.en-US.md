@@ -51,8 +51,6 @@ npm install react-monitor-dag
 | onContextmenuEdge |                       Right-Click Edge Event                      |            <font color="c41d7f">(edge) => void</font>           |                                    -                                    |
 | onContextmenuGroup |                       Right-Click Group Event                      |            <font color="c41d7f">(data) => void</font>           |  
 | onChangePage |                             Single-Click Group Pagination Event                      |            <font color="c41d7f">(data) => void</font>           | 
-| onGroupSearch |                             Out of Focus Event Event                      |            <font color="c41d7f">(data) => void</font>           | 
-
 
 
 <br>
@@ -171,7 +169,6 @@ import 'react-monitor-dag/dist/index.css';
   onContextmenuEdge={(edge) => {}}  // Right Click Edge Event
   onContextmenuGroup={(data) => {}}   // Right Click Group Event
   onChangePage={(data) => {}}        // Single Click Group Pagination Event
-  onGroupSearch={(data) => {}}        // Out of Focus Event
   polling={{                        // support polling
     enable: true,
     interval: 5000,                 // interval of polling 
@@ -261,7 +258,6 @@ interface props {
     onContextmenuEdge ? (edge: any) : void, // Right-Click Edge Event
     onContextmenuGroup?(edge: any): void,   // Right-Click Group Event
     onChangePage?(data:any): void,          // Single-Click Group Pagination Event
-    onGroupSearch?(data:any): void  //  Out of Focus Event 
 }
 ```
 

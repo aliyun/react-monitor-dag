@@ -30,14 +30,14 @@ export let transformInitData = (info) => {
   if(data.groups && data.groups.length > 0) {
     data.groups.map(item => {
       let _current;
-      let {pageSize, current, filterValue='', isSearch, total} = item.options;
+      let {pageSize, current, filterValue='', isSearch} = item.options;
       const groupNodes = data.nodes.filter(nodeItem => {
         return nodeItem.group === item.id && nodeItem.title.includes(filterValue)
       });
       if (current){
         _current = (current - 1) * pageSize
       }
-      let _total = total || groupNodes.length;
+      let _total = groupNodes.length || 1;
       let pageCount = Math.ceil(_total / pageSize);
       // 当点击2的时候如果第二页是最后一页进入else全部展示
       if (_total > current + pageSize) {
