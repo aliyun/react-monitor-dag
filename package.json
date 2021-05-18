@@ -1,6 +1,6 @@
 {
   "name": "react-monitor-dag",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "build": 2,
   "description": "一个基于React的运维/监控DAG图",
   "main": "dist/index.js",
@@ -20,7 +20,7 @@
   "author": "无惟",
   "license": "MIT",
   "dependencies": {
-    "butterfly-dag": "^3.2.5"
+    "butterfly-dag": "~4.0.2"
   },
   "peerDependencies": {
     "react": ">15.6.1",

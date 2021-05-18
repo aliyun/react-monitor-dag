@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {Layout, Pagination, Input} from 'antd';
-import MonitorDag from '../index.tsx';
+import MonitorDag from '../src/index.tsx';
 import mockData from './mock_data/data';
 import 'antd/dist/antd.css';
 import './index.less';
