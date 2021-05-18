@@ -4,11 +4,6 @@ import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
 import RightMenuGen from './right-menu';
-const getSearchValueFn = (value) => {
-  this.emit('custom.group.searchValue', {
-    value
-  });
-}
 
 const renderPagenation = (data) => {
   const {current, total, pageSize, isSearch, filterValue, pageCount} = data.options;
@@ -78,12 +73,15 @@ class BaseGroup extends Group {
         e.preventDefault();
         e.stopPropagation();
         $(`input[id=${this.id}]`).val();
+        obj.options.filterValue = $(`input[id=${this.id}]`).val();
       })
       pagenation.find(`input[id=${this.id}]`).on('blur',(e) => {
         e.preventDefault();
         e.stopPropagation();
-        let value = $(`input[id=${this.id}]`).val();
-        getSearchValueFn(value);
+        obj.options.current = 1;
+        this.emit('custom.group.pagenationClick', {
+          groups: obj
+        });
       })
    }
 

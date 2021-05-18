@@ -6,7 +6,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {Layout, Pagination, Input} from 'antd';
 import MonitorDag from '../index.tsx';
 import mockData from './mock_data/data';
-
 import 'antd/dist/antd.css';
 import './index.less';
 
@@ -60,6 +59,7 @@ const groupMenu = [{
     console.log('run node');
   }
 }]
+
 
 ReactDOM.render((
   <Router>

@@ -76,7 +76,6 @@ interface ComProps {
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
   onContextmenuGroup?(edge: any): void,           // 右键线段事件
   onChangePage?(data:any): void,                 // 分页事件
-  onGroupSearch?(data:any): void                 // 搜索
 }
 
 export default class MonitorDag extends React.Component<ComProps, any> {
@@ -122,6 +121,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     };
   }
   componentDidMount() {
+    console.log(this.props);
     let root = ReactDOM.findDOMNode(this) as HTMLElement;
     if (this.props.width !== undefined) {
       root.style.width = this.props.width + 'px';
@@ -206,11 +206,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
 
     this.canvas.on('custom.group.pagenationClick', (data: any) => {
-      this.props.onChangePage && this.props.onChangePage(data.groups);
-    });
-
-    this.canvas.on('custom.group.searchValue', (data: any) => {
-      this.props.onGroupSearch && this.props.onGroupSearch(data);
+      this.changGroupsOptions(data);
     });
 
     this.canvas.on('custom.groups.rightClick', (data: any) => {
@@ -254,6 +250,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       });
     }
 
+
     this.canvasData = result;
 
     // 检测轮训
@@ -274,6 +271,28 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         {this._createActionIcon()}
       </div>
     )
+  }
+
+  changGroupsOptions(data) {
+    const _data = {...this.props.data};
+    _data.groups.map(item => {
+      if(item.id === data.groups.id) {
+        item.options = data.groups.options;
+      }
+      return item
+    })
+    let result = transformInitData({
+      config: this.props.config,
+      nodeMenu: this.props.nodeMenu,
+      edgeMenu: this.props.edgeMenu,
+      groupMenu: this.props.edgeMenu,
+      data: _.cloneDeep(_data),
+      registerStatus: _.cloneDeep(this.props.registerStatus)
+    });
+    this.canvas.redraw(result);
+    this.canvasData = result;
+    this.props.onChangePage && this.props.onChangePage(_data.groups);
+
   }
   _createStatusNote() {
     let isShow = _.get(this, 'props.config.statusNote.enable', true);
