@@ -146,7 +146,8 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       theme: {
         edge: {
           // todo,
-          type: _.get(this, 'props.config.edge.type', 'AdvancedBezier'),
+          type: 'endpoint',
+          shapeType: _.get(this, 'props.config.edge.shapeType', 'AdvancedBezier'),
           isExpandWidth: true,
           arrow: _.get(this, 'props.config.edge.config.arrow', true),
           arrowPosition: _.get(this, 'props.config.edge.config.arrowPosition', 1),
