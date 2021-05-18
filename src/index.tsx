@@ -5,9 +5,9 @@ import * as ReactDOM from 'react-dom';
 import * as _ from 'lodash';
 import './index.less';
 import 'butterfly-dag/dist/index.css';
-import Canvas from './src/canvas/canvas';
-import Edge from './src/canvas/edge';
-import {transformInitData, diffPropsData} from './src/adaptor';
+import Canvas from './canvas/canvas';
+import Edge from './canvas/edge';
+import {transformInitData, diffPropsData} from './adaptor';
 
 // 右键菜单配置
 interface menu {
@@ -121,7 +121,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     };
   }
   componentDidMount() {
-    console.log(this.props);
     let root = ReactDOM.findDOMNode(this) as HTMLElement;
     if (this.props.width !== undefined) {
       root.style.width = this.props.width + 'px';
@@ -169,7 +168,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
     });
     this.canvas.on('events', (data) => {
-      console.log(data);
+      // console.log(data);
     });
     this.canvasData = result;
 

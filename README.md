@@ -2,7 +2,7 @@
   一个基于React的运维/监控DAG图
 </h3>
 
-[English](. /README. en-US. md) | 简体中文
+[English](./README.en-US.md) | 简体中文
 
 <p align="center">
   <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01nRgm2r1I0BOXGYq9a_!!6000000000830-1-tps-1665-826.gif">

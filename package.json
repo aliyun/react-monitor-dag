@@ -1,6 +1,6 @@
 {
   "name": "react-monitor-dag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "build": 2,
   "description": "一个基于React的运维/监控DAG图",
   "main": "dist/index.js",
@@ -25,7 +25,8 @@
   "peerDependencies": {
     "react": ">15.6.1",
     "react-dom": ">15.6.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "jquery": ">=2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",
