@@ -30,7 +30,7 @@ export let transformInitData = (info) => {
   if(data.groups && data.groups.length > 0) {
     data.groups.map(item => {
       let _current;
-      let {pageSize, current, filterValue='', isAllData, total} = item.options;
+      let {pageSize, current, filterValue=''} = item.options;
       const groupNodes = data.nodes.filter(nodeItem => {
         return nodeItem.group === item.id && nodeItem.title.includes(filterValue)
       });

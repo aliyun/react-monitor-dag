@@ -262,7 +262,7 @@ export default {
     id: 'group',
     options: {
       title: '测试',
-      current: 3,
+      current: 1,
       pageSize: 5,
       isSearch: true,
       filterValue: '算法'

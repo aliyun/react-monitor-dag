@@ -2,7 +2,7 @@
   一个基于React的运维/监控DAG图
 </h3>
 
-[English](. /README. en-US. md) | 简体中文
+[English](./README.en-US.md) | 简体中文
 
 <p align="center">
   <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01nRgm2r1I0BOXGYq9a_!!6000000000830-1-tps-1665-826.gif">
@@ -148,6 +148,7 @@ npm install react-monitor-dag
 |    code   |    左上角状态    |  <font color="c41d7f">string</font> |   -   |
 | className |  左上角状态栏类名 | <font color="c41d7f"> string</font> |   -   |
 |    text   | 左上角状态显示文字 |  <font color="c41d7f">string</font> |   -   |
+|   render  | 自定义渲染方法 |  <font color="c41d7f">function</font> |   -   |
 
 <br>
 
@@ -245,7 +246,8 @@ interface props {
       notes: [{
         code: string,
         className: string,
-        text: string
+        text: string,
+        render?: () => JSX.Element
       }]
     },
     onClickNode ? (node: any) : void, // 单击节点事件

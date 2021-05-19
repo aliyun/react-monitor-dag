@@ -84,7 +84,6 @@ class BaseGroup extends Group {
         });
       })
    }
-
     group.append(this._container);
     return _dom;
   }

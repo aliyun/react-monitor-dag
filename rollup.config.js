@@ -65,7 +65,7 @@ const rollupCfg = [];
 
 // all in one 构建
 rollupCfg.push({
-  input: path.join(__dirname, 'index.tsx'),
+  input: path.join(__dirname, 'src/index.tsx'),
   output: [
     {
       file: pkg.pack,

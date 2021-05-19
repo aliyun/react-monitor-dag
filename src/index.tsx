@@ -5,10 +5,9 @@ import * as ReactDOM from 'react-dom';
 import * as _ from 'lodash';
 import './index.less';
 import 'butterfly-dag/dist/index.css';
-import Canvas from './src/canvas/canvas';
-import Edge from './src/canvas/edge';
-import Group from './src/canvas/group';
-import {transformInitData, diffPropsData} from './src/adaptor';
+import Canvas from './canvas/canvas';
+import Edge from './canvas/edge';
+import {transformInitData, diffPropsData} from './adaptor';
 
 // 右键菜单配置
 interface menu {
@@ -66,7 +65,8 @@ interface ComProps {
     notes: [{
       code: string,
       className: string,
-      text: string
+      text: string,
+      render?:() => JSX.Element
     }]
   },
   onClickNode?(node: any): void,                 // 单击节点事件
@@ -147,7 +147,8 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       theme: {
         edge: {
           // todo,
-          type: _.get(this, 'props.config.edge.type', 'AdvancedBezier'),
+          type: 'endpoint',
+          shapeType: _.get(this, 'props.config.edge.shapeType', 'AdvancedBezier'),
           isExpandWidth: true,
           arrow: _.get(this, 'props.config.edge.config.arrow', true),
           arrowPosition: _.get(this, 'props.config.edge.config.arrowPosition', 1),
@@ -169,7 +170,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
     });
     this.canvas.on('events', (data) => {
-      console.log(data);
+      // console.log(data);
     });
     this.canvasData = result;
 
@@ -282,7 +283,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
       return item
     })
-
     let result = transformInitData({
         config: this.props.config,
         nodeMenu: this.props.nodeMenu,
@@ -291,9 +291,9 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         data: _.cloneDeep(_data),
         registerStatus: _.cloneDeep(this.props.registerStatus)
     });
-      const _node = this.canvasData.nodes.filter(item => item.group === data.groups.id);
-      this.canvas.removeNodes(_node.map(item => item.id));
-      this.canvas.removeGroup(data.groups.id)
+    const _node = this.canvasData.nodes.filter(item => item.group === data.groups.id);
+    this.canvas.removeNodes(_node.map(item => item.id));
+    this.canvas.removeGroups([data.groups.id]);
     this.canvas.draw(result);
     this.canvasData = result;
     this.props.onChangePage && this.props.onChangePage(_data.groups);
@@ -307,12 +307,20 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
       let result = [];
       for(let key in this._statusNote) {
-        result.push(
-          <span className='status-box'>
-            <span className={`status-point ${this._statusNote[key].className}`}></span>
-            <span className="status-text">{this._statusNote[key].text}</span>
-          </span>
-        );
+        if(typeof _.get(this._statusNote, `${key}.render`) === 'function') {
+          result.push(
+            <span className='status-box'>
+              {this._statusNote[key].render()}
+            </span>
+          )
+        } else {
+          result.push(
+            <span className='status-box'>
+              <span className={`status-point ${this._statusNote[key].className}`}></span>
+              <span className="status-text">{this._statusNote[key].text}</span>
+            </span>
+          );
+        }
       }
       return (
         <div className="status-container">

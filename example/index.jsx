@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {Layout, Pagination, Input} from 'antd';
-import MonitorDag from '../index.tsx';
+import {CloseCircleOutlined, CheckOutlined} from '@ant-design/icons';
+import MonitorDag from '../src/index.tsx';
 import mockData from './mock_data/data';
 import 'antd/dist/antd.css';
 import './index.less';
@@ -79,11 +80,25 @@ ReactDOM.render((
             labelTipsRender: (label, info) => {
               return `${label}: 自定义label tips`;
             },
-            // nodeRender: (nodeOpts) => {
-            //   return (
-            //     <span className="node-text">{nodeOpts.title}</span>
-            //   )
-            // },
+            nodeRender: (nodeOpts) => {
+              return (
+                <span className="node-text">{nodeOpts.title + nodeOpts
+                .id}</span>
+              )
+            },
+            statusNote: {
+              notes: [{
+                code: 'fail',
+                render: () => {
+                  return <span><CloseCircleOutlined />失败</span>
+                }
+              }, {
+                code: 'success',
+                render: () => {
+                  return <span><CheckOutlined />成功</span>
+                }
+              }]
+            },
             nodeTipsRender: (nodeOpts) => {
               return <span>{nodeOpts.title}: 自定义节点tips</span>
             },
