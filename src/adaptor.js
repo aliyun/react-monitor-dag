@@ -122,7 +122,7 @@ export let diffPropsData = (newData, oldData) => {
     );
   });
   let updateStatus = [];
-  newData.forEach((_newNode) => {
+  newData.nodes.forEach((_newNode) => {
     let oldNode = _.find(oldData, (_oldNode) => {
       return _newNode.id === _oldNode.id;
     });
