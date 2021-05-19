@@ -65,7 +65,8 @@ interface ComProps {
     notes: [{
       code: string,
       className: string,
-      text: string
+      text: string,
+      render?:() => JSX.Element
     }]
   },
   onClickNode?(node: any): void,                 // 单击节点事件
@@ -303,12 +304,20 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
       let result = [];
       for(let key in this._statusNote) {
-        result.push(
-          <span className='status-box'>
-            <span className={`status-point ${this._statusNote[key].className}`}></span>
-            <span className="status-text">{this._statusNote[key].text}</span>
-          </span>
-        );
+        if(typeof _.get(this._statusNote, `${key}.render`) === 'function') {
+          result.push(
+            <span className='status-box'>
+              {this._statusNote[key].render()}
+            </span>
+          )
+        } else {
+          result.push(
+            <span className='status-box'>
+              <span className={`status-point ${this._statusNote[key].className}`}></span>
+              <span className="status-text">{this._statusNote[key].text}</span>
+            </span>
+          );
+        }
       }
       return (
         <div className="status-container">

@@ -148,6 +148,7 @@ npm install react-monitor-dag
 |    code   |    左上角状态    |  <font color="c41d7f">string</font> |   -   |
 | className |  左上角状态栏类名 | <font color="c41d7f"> string</font> |   -   |
 |    text   | 左上角状态显示文字 |  <font color="c41d7f">string</font> |   -   |
+|   render  | 自定义渲染方法 |  <font color="c41d7f">function</font> |   -   |
 
 <br>
 
@@ -245,7 +246,8 @@ interface props {
       notes: [{
         code: string,
         className: string,
-        text: string
+        text: string,
+        render?: () => JSX.Element
       }]
     },
     onClickNode ? (node: any) : void, // 单击节点事件

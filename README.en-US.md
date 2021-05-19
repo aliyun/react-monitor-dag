@@ -149,6 +149,7 @@ the configuration of status note
 |    code   |    status code   |  <font color="c41d7f">string</font> |    -    |
 | className | status className | <font color="c41d7f"> string</font> |    -    |
 |    text   |    status text   |  <font color="c41d7f">string</font> |    -    |
+|   render  | custom rendering methods |  <font color="c41d7f">function</font> |    -    |
 
 <br>
 
@@ -189,7 +190,7 @@ import 'react-monitor-dag/dist/index.css';
     notes: [{
       code: 'success',
       className: 'success-class',
-      text: '运行成功'
+      text: '运行成功',
     }]
   }}
 >
@@ -247,7 +248,8 @@ interface props {
       notes: [{
         code: string,
         className: string,
-        text: string
+        text: string,
+        render?:() => JSX.Element
       }]
     },
     onClickNode ? (node: any) : void, // Single Click Node Event
