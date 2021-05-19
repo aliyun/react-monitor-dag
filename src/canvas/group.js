@@ -133,10 +133,9 @@ class BaseGroup extends Group {
   _updatePage(obj, type) {
       const oldDom = $(this.dom).find('.group-pagination-wrap-pager')
       oldDom.html(`${obj.options.current}/${obj.options.pageCount}`)
-    if(type === 'input') {
-      console.log(this, 'this');
-      $(this.dom).find(`input[id=${this.id}]`).val(obj.options.filterValue);
-    }
+      if(type === 'input') {
+        $(this.dom).find(`input[id=${this.id}]`).val(obj.options.filterValue);
+      }
   }
 }
 export default BaseGroup;

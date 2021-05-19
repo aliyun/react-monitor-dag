@@ -34,27 +34,27 @@ export let transformInitData = (info) => {
       const groupNodes = data.nodes.filter(nodeItem => {
         return nodeItem.group === item.id && nodeItem.title.includes(filterValue)
       });
-        if (current){
-          _current = (current - 1) * pageSize
-        }
-        let _total = groupNodes.length || 1;
-        let pageCount = Math.ceil(_total / pageSize);
-        // 当点击2的时候如果第二页是最后一页进入else全部展示
-        if (_total > current + pageSize) {
-          pageData = groupNodes.slice(_current, _current + pageSize);
-        } else {
-          pageData = groupNodes.slice(_current, groupNodes.length);
-        }
-        pageData = nodePositionFn(item, pageData); // 计算位置
-        _nodes.push(...pageData);
-        item.options = {
-          ...item.options,
-          title: '共' + groupNodes.length + '个节点',
-          total: _total,
-          pageSize,
-          current,
-          pageCount
-        }
+      if (current){
+        _current = (current - 1) * pageSize
+      }
+      let _total = groupNodes.length || 1;
+      let pageCount = Math.ceil(_total / pageSize);
+      // 当点击2的时候如果第二页是最后一页进入else全部展示
+      if (_total > current + pageSize) {
+        pageData = groupNodes.slice(_current, _current + pageSize);
+      } else {
+        pageData = groupNodes.slice(_current, groupNodes.length);
+      }
+      pageData = nodePositionFn(item, pageData); // 计算位置
+      _nodes.push(...pageData);
+      item.options = {
+        ...item.options,
+        title: '共' + groupNodes.length + '个节点',
+        total: _total,
+        pageSize,
+        current,
+        pageCount
+      }
       return item;
     })
   } else {
