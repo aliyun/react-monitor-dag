@@ -1,7 +1,7 @@
 {
   "name": "react-monitor-dag",
   "version": "1.0.0",
-  "build": 2,
+  "build": 3,
   "description": "一个基于React的运维/监控DAG图",
   "main": "dist/index.js",
   "pack": "pack/index.js",
