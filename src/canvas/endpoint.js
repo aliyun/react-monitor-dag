@@ -31,6 +31,7 @@ class NewEndPoint extends Endpoint {
       Tips.createTip({
         placement: placement,
         targetDom: this.dom,
+        notEventThrough: true,
         genTipDom: () => {
           return tipsDom[0];
         }

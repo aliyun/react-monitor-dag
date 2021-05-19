@@ -86,19 +86,19 @@ ReactDOM.render((
             //     .id}</span>
             //   )
             // },
-            statusNote: {
-              notes: [{
-                code: 'fail',
-                render: () => {
-                  return <span><CloseCircleOutlined />失败</span>
-                }
-              }, {
-                code: 'success',
-                render: () => {
-                  return <span><CheckOutlined />成功</span>
-                }
-              }]
-            },
+            // statusNote: {
+            //   notes: [{
+            //     code: 'fail',
+            //     render: () => {
+            //       return <span><CloseCircleOutlined />失败</span>
+            //     }
+            //   }, {
+            //     code: 'success',
+            //     render: () => {
+            //       return <span><CheckOutlined />成功</span>
+            //     }
+            //   }]
+            // },
             nodeTipsRender: (nodeOpts) => {
               return <span>{nodeOpts.title}: 自定义节点tips</span>
             },

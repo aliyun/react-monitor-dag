@@ -5,7 +5,7 @@
 English| [简体中文](. /README. md)
 
 <p align="center">
-  <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01nRgm2r1I0BOXGYq9a_!!6000000000830-1-tps-1665-826.gif">
+  <img width="100%" src="https://img.alicdn.com/imgextra/i2/O1CN01eJigoL1gd9tjRSvdi_!!6000000004164-1-tps-1665-826.gif">
 </p>
 
 ## ✨ Feature
