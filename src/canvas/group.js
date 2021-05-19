@@ -1,10 +1,9 @@
-import {Group, Canvas} from 'butterfly-dag';
+import {Group} from 'butterfly-dag';
 import $ from 'jquery';
 import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
 import RightMenuGen from './right-menu';
-import {transformInitData} from '../adaptor'
 
 const renderPagenation = (data) => {
   const {current, total, pageSize, isSearch, filterValue, pageCount} = data.options;
@@ -49,7 +48,6 @@ class BaseGroup extends Group {
         pagenation[0]
       );
       pagenation.find('.group-pagination-wrap-prev').on('click', (e) => {
-        console.log('sssssss')
         e.preventDefault();
         e.stopPropagation();
         obj.options.current = obj.options.current === 1 ? 1 : obj.options.current - 1

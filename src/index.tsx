@@ -224,7 +224,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     this._polling();
   }
   shouldComponentUpdate(newProps: ComProps, newState: any) {
-    console.log(newProps, 'shouldComponentUpdate');
     let result = transformInitData({
       config: this.props.config,
       nodeMenu: this.props.nodeMenu,
