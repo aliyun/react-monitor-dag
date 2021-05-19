@@ -20,9 +20,19 @@ interface menu {
 // 画布配置
 interface config {
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
+  draggable?: boolean, // 是否允许节点拖拽
   edge?: {        //定制线段的类型，todo需要思考
     type: string,
     config: any
+  },
+  statusNote?: {
+    enable: boolean,
+    notes: [{
+      code: string,
+      className: string,
+      text: string,
+      render?:() => JSX.Element
+    }]
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
   nodeRednder?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
@@ -49,7 +59,7 @@ interface ComProps {
   nodeMenu: Array<menu>,               // 节点右键菜单配置
   edgeMenu: Array<menu>,            // 线段右键菜单配置
   groupMenu: Array<menu>,              // group右键配置
-  config?: any,                        // 画布配置
+  config?: config,                        // 画布配置
   polling?: {                          // 支持轮训
     enable: boolean,
     interval: number,
@@ -60,16 +70,8 @@ interface ComProps {
     fail: string,
     // key:value的形式，可以自行注册，和node的status字段对应起来
   },
-  statusNote?: {
-    enable: boolean,
-    notes: [{
-      code: string,
-      className: string,
-      text: string,
-      render?:() => JSX.Element
-    }]
-  },
   onClickNode?(node: any): void,                 // 单击节点事件
+  onClickCanvas?():void,                         // 点击画布空白处事件
   onContextmenuNode?(node: any): void,           // 右键节点事件
   onDblClickNode?(node: any): void,              // 双击节点事件
   onClickEdge?(edge: any): void,                 // 单击线段事件
@@ -141,7 +143,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       root: root,
       disLinkable: false,
       linkable: false,
-      draggable: true,
+      draggable: _.get(this.props, 'config.draggable', true),
       zoomable: true,
       moveable: true,
       theme: {
@@ -204,6 +206,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
 
     this.canvas.on('system.canvas.click', (data: any) => {
       this._unfocus();
+      this.props.onClickCanvas && this.props.onClickCanvas();
     });
 
     this.canvas.on('custom.group.pagenationClick', (data: any) => {
