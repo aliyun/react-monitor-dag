@@ -80,12 +80,12 @@ ReactDOM.render((
             labelTipsRender: (label, info) => {
               return `${label}: 自定义label tips`;
             },
-            nodeRender: (nodeOpts) => {
-              return (
-                <span className="node-text">{nodeOpts.title + nodeOpts
-                .id}</span>
-              )
-            },
+            // nodeRender: (nodeOpts) => {
+            //   return (
+            //     <span className="node-text">{nodeOpts.title + nodeOpts
+            //     .id}</span>
+            //   )
+            // },
             statusNote: {
               notes: [{
                 code: 'fail',

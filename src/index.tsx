@@ -156,7 +156,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           arrowPosition: _.get(this, 'props.config.edge.config.arrowPosition', 1),
           arrowOffset: _.get(this, 'props.config.edge.config.arrowPosition', -8),
           Class: Edge
-        }
+        },
       }
     });
     this.canvas.draw(result, () => {
@@ -209,8 +209,8 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       this.props.onClickCanvas && this.props.onClickCanvas();
     });
 
-    this.canvas.on('custom.group.pagenationClick', (data: any) => {
-      this.changGroupsOptions(data);
+    this.canvas.on('custom.group.pagenationClick', (data: any, type: string) => {
+      this.changGroupsOptions(data, type);
     });
 
     this.canvas.on('custom.groups.rightClick', (data: any) => {
@@ -278,7 +278,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     )
   }
 
-  changGroupsOptions(data) {
+  changGroupsOptions(data, type) {
     const _data = {...this.props.data};
     _data.groups.map(item => {
       if(item.id === data.groups.id) {
@@ -296,7 +296,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
     const _node = this.canvasData.nodes.filter(item => item.group === data.groups.id);
     this.canvas.removeNodes(_node.map(item => item.id));
-    this.canvas.removeGroups([data.groups.id]);
     this.canvas.draw(result);
     this.canvasData = result;
     this.props.onChangePage && this.props.onChangePage(_data.groups);

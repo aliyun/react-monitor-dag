@@ -1,13 +1,14 @@
-import {Group} from 'butterfly-dag';
+import {Group, Canvas} from 'butterfly-dag';
 import $ from 'jquery';
 import _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
 import RightMenuGen from './right-menu';
+import {transformInitData} from '../adaptor'
 
 const renderPagenation = (data) => {
   const {current, total, pageSize, isSearch, filterValue, pageCount} = data.options;
-  return <div>
+  return <div className="group-pagination">
   {isSearch ? <input placeholder="请输入" className="group-search-input" value={filterValue} id={data.id} /> : null}  
   <div className="group-pagination-wrap">
     <i className="monitor-icon monitor-icon-left-circle group-pagination-wrap-prev"></i>
@@ -48,12 +49,14 @@ class BaseGroup extends Group {
         pagenation[0]
       );
       pagenation.find('.group-pagination-wrap-prev').on('click', (e) => {
+        console.log('sssssss')
         e.preventDefault();
         e.stopPropagation();
         obj.options.current = obj.options.current === 1 ? 1 : obj.options.current - 1
         this.emit('custom.group.pagenationClick', {
           groups: obj
         });
+       this._updatePage(obj, 'page');
       });
       pagenation.find('.group-pagination-wrap-next').on('click', (e) => {
         e.preventDefault();
@@ -62,6 +65,7 @@ class BaseGroup extends Group {
         this.emit('custom.group.pagenationClick', {
           groups: obj
         });
+        this._updatePage(obj, 'page');
       });
 
       pagenation.find(`input[id=${this.id}]`).on('click',(e) => {
@@ -74,14 +78,30 @@ class BaseGroup extends Group {
         e.stopPropagation();
         $(`input[id=${this.id}]`).val();
         obj.options.filterValue = $(`input[id=${this.id}]`).val();
+        this._updatePage(obj, 'input');
       })
       pagenation.find(`input[id=${this.id}]`).on('blur',(e) => {
         e.preventDefault();
         e.stopPropagation();
         obj.options.current = 1;
         this.emit('custom.group.pagenationClick', {
-          groups: obj
+          groups: obj,
+          type: 'input'
         });
+        this._updatePage(obj, 'input');
+      })
+      pagenation.find(`input[id=${this.id}]`).on('keyup',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.keyCode === 13) {
+          $(`input[id=${this.id}]`).val('');
+          obj.options.current = 1;
+          this._updatePage(obj, 'input');
+          this.emit('custom.group.pagenationClick', {
+            groups: obj,
+            type: 'input'
+          });
+        }
       })
    }
     group.append(this._container);
@@ -109,6 +129,15 @@ class BaseGroup extends Group {
           groups: this
         });
       })
+    }
+  }
+
+  _updatePage(obj, type) {
+      const oldDom = $(this.dom).find('.group-pagination-wrap-pager')
+      oldDom.html(`${obj.options.current}/${obj.options.pageCount}`)
+    if(type === 'input') {
+      console.log(this, 'this');
+      $(this.dom).find(`input[id=${this.id}]`).val(obj.options.filterValue);
     }
   }
 }
