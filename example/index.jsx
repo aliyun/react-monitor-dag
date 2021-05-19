@@ -82,7 +82,8 @@ ReactDOM.render((
             },
             // nodeRender: (nodeOpts) => {
             //   return (
-            //     <span className="node-text">{nodeOpts.title}</span>
+            //     <span className="node-text">{nodeOpts.title + nodeOpts
+            //     .id}</span>
             //   )
             // },
             statusNote: {
