@@ -69,7 +69,7 @@ class BaseGroup extends Group {
         e.stopPropagation();
         $(`input[id=${this.id}]`).focus();
       })
-     pagenation.find(`input[id=${this.id}]`).on('input',(e) => {
+      pagenation.find(`input[id=${this.id}]`).on('input',(e) => {
         e.preventDefault();
         e.stopPropagation();
         $(`input[id=${this.id}]`).val();
@@ -86,9 +86,6 @@ class BaseGroup extends Group {
    }
 
     group.append(this._container);
-
-    
-
     return _dom;
   }
 
@@ -96,6 +93,10 @@ class BaseGroup extends Group {
     // 生成右键菜单
     this._createRightMenu();
   }
+
+  // removeNodes = (node) => {
+  //   console.log(node);
+  // }
 
    // 生成右键菜单
    _createRightMenu() {

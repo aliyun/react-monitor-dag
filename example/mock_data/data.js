@@ -3,30 +3,52 @@ export default {
   nodes: [
     {
       id: '1',
-      title: '某某算法',
-      className: 'icon-background-color',
-      iconType: 'icon-kaifa',
       top: 50,
-      left: 400,
-      status: 'success',
-    },
-    {
+      left: 500,
+      title: '任务1',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'success'
+    }, {
       id: '2',
-      title: '某某算法',
-      className: 'icon-background-color',
-      iconType: 'icon-kaifa',
       top: 150,
-      left: 400,
-      status: 'running',
-    },
-    {
-      id: '3',
-      title: '某某算法',
+      left: 500,
+      title: '任务2',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
+      status: 'running'
+    }, {
+      id: '3',
       top: 250,
-      left: 400,
-      status: 'timeout',
+      left: 500,
+      title: '任务3',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'waiting'
+    }, {
+      id: '4',
+      top: 350,
+      left: 500,
+      title: '任务4',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'timeout'
+    }, {
+      id:'5',
+      top: 450,
+      left: 500,
+      title: '任务5',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'fail'
+    }, {
+      id: '6',
+      top: 550,
+      left: 500,
+      title: '自定义',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'other',
       endpoints: [{
         id: 'top',
         orientation: [0, -1],
@@ -38,7 +60,7 @@ export default {
       }]
     },
     {
-      id: '16',
+      id: '7',
       title: '某某算法11',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -48,7 +70,7 @@ export default {
       status: 'success',
     },
     {
-      id: '17',
+      id: '8',
       title: '某某算法22',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -58,7 +80,7 @@ export default {
       status: 'success',
     },
     {
-      id: '18',
+      id: '9',
       title: '某某算法33',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -68,7 +90,7 @@ export default {
       status: 'success',
     },
     {
-      id: '4',
+      id: '10',
       title: '某某算法44',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -78,7 +100,7 @@ export default {
       status: 'success',
     },
     {
-      id: '5',
+      id: '11',
       title: '某某算法55',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -88,7 +110,7 @@ export default {
       status: 'success',
     },
     {
-      id: '6',
+      id: '12',
       title: '某某算法66',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -98,7 +120,7 @@ export default {
       status: 'success',
     },
     {
-      id: '7',
+      id: '13',
       title: '某某算法77',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -108,7 +130,7 @@ export default {
       status: 'success',
     },
     {
-      id: '8',
+      id: '14',
       title: '某某算法88',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -118,7 +140,7 @@ export default {
       status: 'success',
     },
     {
-      id: '9',
+      id: '15',
       title: '某某算法99',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -128,7 +150,7 @@ export default {
       status: 'success',
     },
     {
-      id: '10',
+      id: '16',
       title: '某某算法00',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -138,7 +160,7 @@ export default {
       status: 'success',
     },
     {
-      id: '11',
+      id: '17',
       title: '某某算法qq',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -148,7 +170,7 @@ export default {
       status: 'success',
     },
     {
-      id: '12',
+      id: '18',
       title: '某某算法ww',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -158,7 +180,7 @@ export default {
       status: 'success',
     },
     {
-      id: '13',
+      id: '19',
       title: '某某算法ee',
       className: 'icon-background-color',
       iconType: 'icon-kaifa',
@@ -168,7 +190,7 @@ export default {
       status: 'success',
     },
     {
-      id: '15',
+      id: '20',
       title: '交运算rr',
       className: 'icon-background-color',
       iconType: 'icon-guanlian',
@@ -194,13 +216,42 @@ export default {
       sourceNode: '2',
       targetNode: '3',
       arrow: true,
+      flow: true,
       type: 'endpoint',
+      arrowPosition: 0.5,
+    },
+    {
+      source: '3',
+      target: '4',
+      sourceNode: '3',
+      targetNode: '4',
+      arrow: true,
+      type: 'endpoint',
+      arrowPosition: 0.5,
+    },
+    {
+      source: '4',
+      target: '5',
+      sourceNode: '4',
+      targetNode: '5',
+      arrow: true,
+      type: 'endpoint',
+      arrowPosition: 0.5,
+    },
+    {
+      source: '5',
+      target: '6',
+      sourceNode: '5',
+      targetNode: '6',
+      arrow: true,
+      type: 'endpoint',
+      label: 'test label',
       arrowPosition: 0.5,
     },
     {
       source: 'bottom',
       target: 'groupTop',
-      sourceNode: '3',
+      sourceNode: '6',
       targetNode: 'group',
       arrow: true,
       type: 'endpoint',
@@ -216,8 +267,8 @@ export default {
       isSearch: true,
       filterValue: '算法'
     },
-    top: 330,
-    left: 200,
+    top: 650,
+    left: 300,
     width: 500,
     height: 300,
     resize: true,

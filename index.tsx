@@ -7,6 +7,7 @@ import './index.less';
 import 'butterfly-dag/dist/index.css';
 import Canvas from './src/canvas/canvas';
 import Edge from './src/canvas/edge';
+import Group from './src/canvas/group';
 import {transformInitData, diffPropsData} from './src/adaptor';
 
 // 右键菜单配置
@@ -121,7 +122,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     };
   }
   componentDidMount() {
-    console.log(this.props);
     let root = ReactDOM.findDOMNode(this) as HTMLElement;
     if (this.props.width !== undefined) {
       root.style.width = this.props.width + 'px';
@@ -220,6 +220,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     this._polling();
   }
   shouldComponentUpdate(newProps: ComProps, newState: any) {
+    console.log(newProps, 'shouldComponentUpdate');
     let result = transformInitData({
       config: this.props.config,
       nodeMenu: this.props.nodeMenu,
@@ -281,18 +282,21 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       }
       return item
     })
+
     let result = transformInitData({
-      config: this.props.config,
-      nodeMenu: this.props.nodeMenu,
-      edgeMenu: this.props.edgeMenu,
-      groupMenu: this.props.edgeMenu,
-      data: _.cloneDeep(_data),
-      registerStatus: _.cloneDeep(this.props.registerStatus)
+        config: this.props.config,
+        nodeMenu: this.props.nodeMenu,
+        edgeMenu: this.props.edgeMenu,
+        groupMenu: this.props.edgeMenu,
+        data: _.cloneDeep(_data),
+        registerStatus: _.cloneDeep(this.props.registerStatus)
     });
-    this.canvas.redraw(result);
+      const _node = this.canvasData.nodes.filter(item => item.group === data.groups.id);
+      this.canvas.removeNodes(_node.map(item => item.id));
+      this.canvas.removeGroup(data.groups.id)
+    this.canvas.draw(result);
     this.canvasData = result;
     this.props.onChangePage && this.props.onChangePage(_data.groups);
-
   }
   _createStatusNote() {
     let isShow = _.get(this, 'props.config.statusNote.enable', true);
