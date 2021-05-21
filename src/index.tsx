@@ -20,10 +20,11 @@ interface menu {
 // 画布配置
 interface config {
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
+  focusCenter?: boolean
   draggable?: boolean, // 是否允许节点拖拽
   edge?: {        //定制线段的类型，todo需要思考
     type: string,
-    config: any
+    config: any,
   },
   statusNote?: {
     enable: boolean,
@@ -169,6 +170,9 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       });
       if (minimap && minimap.enable) {
         this.canvas.setMinimap(true, minimapCfg);
+      }
+      if (_.get(this, 'props.config.focusCenter', {})) {
+        this.canvas.focusCenterWithAnimate();
       }
     });
     this.canvas.on('events', (data) => {
