@@ -36,7 +36,7 @@ interface config {
     }]
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
-  nodeRednder?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
+  nodeRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
   // todo: 宇行，需要在shouldComponentUpdate的时候判断
   autoLayout: {
     enable: boolean,   // 是否开启自动布局
@@ -171,7 +171,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       if (minimap && minimap.enable) {
         this.canvas.setMinimap(true, minimapCfg);
       }
-      if (_.get(this, 'props.config.focusCenter', {})) {
+      if (_.get(this, 'props.config.focusCenter')) {
         this.canvas.focusCenterWithAnimate();
       }
     });
