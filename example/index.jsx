@@ -73,6 +73,7 @@ ReactDOM.render((
           edgeMenu={edgeMenu}
           groupMenu={groupMenu}
           config={{
+            focusCenter: true,
             // direction: 'left-right',
             labelRender: (label, info) => {
               return label;
