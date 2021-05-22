@@ -194,7 +194,7 @@
 
   .group{
     border: 1px dashed white;
-    .butterflie-circle-group-content{
+    .butterflie-group-title-content{
       width: 100%;
       height: 42px;
       cursor: move;
@@ -206,44 +206,42 @@
       background: #545050;
       display: flex;
       justify-content: space-between;
-      .butterflie-circle-group-content-pagenation{
-        padding: 9px 0;
-        cursor: default;
-        .group-pagination-wrap{
-          float: right;
-          height: 24px;
-          line-height: 24px;
-          margin-left: 8;
-          margin: 0 4px 0 8px;
-          .group-pagination-wrap-prev, .group-pagination-wrap-next {
-            min-width: 12px;
-            margin: 0 4px;
-            font-size: 18px;
-            cursor: pointer;
-            color: #b2aeb2;
-          }
-          .group-pagination-wrap-pager{
-            font-size: 18px;
-          }
+      .group-pagination-wrap{
+        position: absolute;
+        right: 10px;
+        top: 8px;
+        height: 24px;
+        line-height: 24px;
+        .group-pagination-wrap-prev, .group-pagination-wrap-next {
+          min-width: 12px;
+          margin: 0 4px;
+          font-size: 18px;
+          cursor: pointer;
+          color: #b2aeb2;
         }
-        .group-search-input{
-          width: 100px;
-          height: 24px;
-          float: left;
-          border-radius: 4px;
-          border: 1px solid #353535;
-          padding: 4px;
-          background-color: #353535;
-          font-size: 14px;
-        }
-        .group-search-input:focus {
-          border: 1px solid #a7a4a4;
-          border-radius: 4px;
-          outline: none
+        .group-pagination-wrap-pager{
+          font-size: 18px;
         }
       }
+      .group-search-input{
+        position: absolute;
+        top: 8px;
+        right: 15px;
+        width: 100px;
+        height: 24px;
+        border-radius: 4px;
+        border: 1px solid #353535;
+        padding: 4px;
+        background-color: #353535;
+        font-size: 14px;
+      }
+      .group-search-input:focus {
+        border: 1px solid #a7a4a4;
+        border-radius: 4px;
+        outline: none
+      }
     }
-    .butterflie-circle-group {
+    .butterflie-group {
       width: 100%;
       height: calc(100% - 42px);
       // background: rgba(246, 105, 2, 0.2);

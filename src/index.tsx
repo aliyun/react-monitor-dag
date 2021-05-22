@@ -20,11 +20,14 @@ interface menu {
 // 画布配置
 interface config {
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
-  focusCenter?: boolean
+  focusCenter?: boolean, //是否初始化的时候把所有节点居中
   draggable?: boolean, // 是否允许节点拖拽
   edge?: {        //定制线段的类型，todo需要思考
     type: string,
     config: any,
+  },
+  group?: {
+    enableSearch: boolean,       // 是否开启节点组搜索节点
   },
   statusNote?: {
     enable: boolean,
@@ -182,7 +185,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
 
     // 监听事件
     this.canvas.on('system.node.click', (data: any) => {
-      this._focusNode(data.node);
+      this._focusNode([data.node]);
       this.props.onClickNode && this.props.onClickNode(data.node);
     });
 
@@ -199,12 +202,12 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
 
     this.canvas.on('system.link.click', (data: any) => {
-      this._focusLink(data.edge);
+      this._focusLink([data.edge]);
       this.props.onClickEdge && this.props.onClickEdge(data.edge);
     });
 
     this.canvas.on('custom.edge.labelClick', (data: any) => {
-      this._focusLink(data.edge);
+      this._focusLink([data.edge]);
       this.props.onClickLabel && this.props.onClickLabel(data.label, data.edge);
     });
 
@@ -213,16 +216,14 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       this.props.onClickCanvas && this.props.onClickCanvas();
     });
 
-    this.canvas.on('custom.group.pagenationClick', (data: any, type: string) => {
-      this.changGroupsOptions(data, type);
-    });
-
     this.canvas.on('custom.groups.rightClick', (data: any) => {
       this.props.onContextmenuGroup && this.props.onContextmenuGroup(data.groups);
     });
-    
 
-    
+    this.canvas.on('custom.group.search', (data: any) => {
+      let nodes = data.nodes;
+      this._focusNode(nodes);
+    });
     
     // 检测轮训
     this._polling();
@@ -281,28 +282,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     )
   }
 
-  changGroupsOptions(data, type) {
-    const _data = {...this.props.data};
-    _data.groups.map(item => {
-      if(item.id === data.groups.id) {
-        item.options = data.groups.options;
-      }
-      return item
-    })
-    let result = transformInitData({
-        config: this.props.config,
-        nodeMenu: this.props.nodeMenu,
-        edgeMenu: this.props.edgeMenu,
-        groupMenu: this.props.edgeMenu,
-        data: _.cloneDeep(_data),
-        registerStatus: _.cloneDeep(this.props.registerStatus)
-    });
-    const _node = this.canvasData.nodes.filter(item => item.group === data.groups.id);
-    this.canvas.removeNodes(_node.map(item => item.id));
-    this.canvas.draw(result);
-    this.canvasData = result;
-    this.props.onChangePage && this.props.onChangePage(_data.groups);
-  }
   _createStatusNote() {
     let isShow = _.get(this, 'props.config.statusNote.enable', true);
     if (isShow) {
@@ -387,16 +366,20 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     }
   }
   // 聚焦节点
-  _focusNode(node) {
+  _focusNode(nodes) {
     this._unfocus();
-    node.focus();
-    this._focusNodes.push(node);
+    nodes.forEach((node) => {
+      node.focus();
+    });
+    this._focusNodes = this._focusNodes.concat(nodes);
   }
   // 聚焦线段
-  _focusLink(edge) {
+  _focusLink(edges) {
     this._unfocus();
-    edge.focus();
-    this._focusLinks.push(edge);
+    edges.forEach((edge) => {
+      edge.focus();
+    });
+    this._focusLinks = this._focusLinks.concat(edges);
   }
   // 失焦
   _unfocus() {

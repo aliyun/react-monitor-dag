@@ -106,6 +106,10 @@ ReactDOM.render((
             endpointTipsRender: (pointOpts) => {
               return <span>自定义锚点tips</span>
             },
+            group: {
+              enablePagination: true,
+              enableSearch: true
+            },
             minimap: {
               enable: true,
               config: {
