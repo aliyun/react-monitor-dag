@@ -75,6 +75,9 @@ ReactDOM.render((
           config={{
             focusCenter: true,
             // direction: 'left-right',
+            autoLayout: {
+              enable: false
+            },
             labelRender: (label, info) => {
               return label;
             },
