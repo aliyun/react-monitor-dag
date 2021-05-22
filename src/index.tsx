@@ -40,11 +40,9 @@ interface config {
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
   nodeRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
-  // todo: 宇行，需要在shouldComponentUpdate的时候判断
-  autoLayout: {
+  autoLayout?: {
     enable: boolean,   // 是否开启自动布局
-    isAlways: boolean, // 是否添加节点后就重新布局
-    type: string, // 算法类型
+    isAlways: boolean, // 是否添加节点后就重新布局, todo
     config: any   // 算法配置
   },
   minimap: {  // 是否开启缩略图
@@ -143,7 +141,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       data: _.cloneDeep(this.props.data),
       registerStatus: _.cloneDeep(this.props.registerStatus)
     });
-    this.canvas = new Canvas({
+    let canvasObj = ({
       root: root,
       disLinkable: false,
       linkable: false,
@@ -163,6 +161,15 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         },
       }
     });
+    if (_.get(this.props, 'config.autoLayout.enable', false)) {
+      canvasObj['layout'] = {
+        type: 'dagreLayout',
+        rankdir: 'TB',
+        nodesep: 40,
+        ranksep: 40
+      };
+    }
+    this.canvas = new Canvas(canvasObj);
     this.canvas.draw(result, () => {
       let minimap = _.get(this, 'props.config.minimap', {});
       const minimapCfg = _.assign({}, minimap.config, {
