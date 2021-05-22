@@ -39,7 +39,7 @@ interface config {
     }]
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
-  nodeRednder?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
+  nodeRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
   // todo: 宇行，需要在shouldComponentUpdate的时候判断
   autoLayout: {
     enable: boolean,   // 是否开启自动布局
