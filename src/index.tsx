@@ -266,6 +266,16 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       });
     }
 
+    if (
+      _.get(this.props, 'config.autoLayout.isAlway', false) && (
+        diffInfo.addNodes.length > 0 ||
+        diffInfo.rmNodes.length > 0 ||
+        diffInfo.addEdges.length > 0 ||
+        diffInfo.rmEdges.length > 0
+      )
+    ) {
+      this.canvas.redraw();
+    }
 
     this.canvasData = result;
 
