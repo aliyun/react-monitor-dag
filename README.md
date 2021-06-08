@@ -80,6 +80,7 @@ npm install react-monitor-dag
 |   nodeTipsRender   |    节点tips的渲染方法   |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 | endpointTipsRender |    锚点tips的渲染方法   |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 |       minimap      |      是否开启缩略图     | [minimap Prop](#minimap-prop)<font color="c41d7f"> { }</font> |                 -                 |
+|       delayDraw      |      是否延迟加载     | <font color="c41d7f"> number</font> |                 0                 |
 
 <br>
 
