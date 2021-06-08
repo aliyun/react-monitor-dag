@@ -139,7 +139,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       nodeMenu: this.props.nodeMenu,
       edgeMenu: this.props.edgeMenu,
       groupMenu: this.props.groupMenu,
-      data: _.cloneDeep(this.props.data),
+      data: _.cloneDeep(this.props.data || {nodes: [], edges: [], groups: []}),
       registerStatus: _.cloneDeep(this.props.registerStatus)
     });
     let canvasObj = ({
@@ -162,7 +162,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         },
       }
     });
-    
+
     if (_.get(this.props, 'config.autoLayout.enable', false)) {
       canvasObj['layout'] = {
         type: 'dagreLayout',
