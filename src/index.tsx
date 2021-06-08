@@ -19,6 +19,7 @@ interface menu {
 
 // 画布配置
 interface config {
+  delayDraw: number, // 延迟加载
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
   focusCenter?: boolean, //是否初始化的时候把所有节点居中
   draggable?: boolean, // 是否允许节点拖拽
@@ -161,30 +162,36 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         },
       }
     });
+    
     if (_.get(this.props, 'config.autoLayout.enable', false)) {
       canvasObj['layout'] = {
         type: 'dagreLayout',
-        rankdir: 'TB',
-        nodesep: 40,
-        ranksep: 40
+        options: {
+          rankdir: _.get(this.props, 'config.direction', 'top-bottom') === 'top-bottom' ? 'TB' : 'LR',
+          nodesep: 40,
+          ranksep: 40
+        }
       };
     }
     this.canvas = new Canvas(canvasObj);
-    this.canvas.draw(result, () => {
-      let minimap = _.get(this, 'props.config.minimap', {});
-      const minimapCfg = _.assign({}, minimap.config, {
-        events: [
-          'system.node.click',
-          'system.canvas.click'
-        ]
-      });
-      if (minimap && minimap.enable) {
-        this.canvas.setMinimap(true, minimapCfg);
-      }
-      if (_.get(this, 'props.config.focusCenter')) {
-        this.canvas.focusCenterWithAnimate();
-      }
-    });
+    setTimeout(() => {
+      this.canvas.draw(result, () => {
+        let minimap = _.get(this, 'props.config.minimap', {});
+        const minimapCfg = _.assign({}, minimap.config, {
+          events: [
+            'system.node.click',
+            'system.canvas.click'
+          ]
+        });
+        if (minimap && minimap.enable) {
+          this.canvas.setMinimap(true, minimapCfg);
+        }
+        if (_.get(this, 'props.config.focusCenter')) {
+          this.canvas.focusCenterWithAnimate();
+        }
+      });  
+    }, _.get(this.props, 'config.delayDraw', 0));
+    
     this.canvas.on('events', (data) => {
       // console.log(data);
     });
@@ -267,7 +274,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     }
 
     if (
-      _.get(this.props, 'config.autoLayout.isAlway', false) && (
+      _.get(this.props, 'config.autoLayout.isAlways', false) && (
         diffInfo.addNodes.length > 0 ||
         diffInfo.rmNodes.length > 0 ||
         diffInfo.addEdges.length > 0 ||

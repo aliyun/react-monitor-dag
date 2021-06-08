@@ -81,6 +81,8 @@ the configuration of canvas
 |   nodeTipsRender   |    rendering tooltips of node    |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 | endpointTipsRender |  rendering tooltips of endpoint  |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 |       minimap      |      whether to show minimap     | [minimap Prop](#minimap-prop)<font color="c41d7f"> { }</font> |                 -                 |
+|       delayDraw      |      Delayed rendering. This component must ensure that the canvas container rendering (including animation execution) is completed before rendering, otherwise the coordinates will be offset, for example：Animation of Ant Design Modal     | <font color="c41d7f"> number</font> |                 0                 |
+
 
 <br>
 

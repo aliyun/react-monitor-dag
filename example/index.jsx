@@ -74,7 +74,7 @@ ReactDOM.render((
           groupMenu={groupMenu}
           config={{
             focusCenter: true,
-            // direction: 'left-right',
+            direction: 'left-right',
             autoLayout: {
               enable: false,
               isAlways: false,
