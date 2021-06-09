@@ -81,7 +81,7 @@ npm install react-monitor-dag
 | endpointTipsRender |    锚点tips的渲染方法   |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 |       minimap      |      是否开启缩略图     | [minimap Prop](#minimap-prop)<font color="c41d7f"> { }</font> |                 -                 |
 |       delayDraw      |      是否延迟加载     | <font color="c41d7f"> number</font> |                 0                 |
-
+|       autoLayout      |      自定义布局     | [autoLayout Prop](#auto-layout-prop)<font color="c41d7f"> {}</font> |                 -               |
 <br>
 
 ### <a name='edge-prop'></a><b>edge</b>
@@ -114,6 +114,18 @@ npm install react-monitor-dag
 |:---------------:|:----------:|:-------------------------------:|:-----:|
 |    nodeColor    |   节点颜色  | <font color="c41d7f">any</font> |   -   |
 | activeNodeColor | 节点激活颜色 | <font color="c41d7f">any</font> |   -   |
+
+<br>
+
+### <a name='auto-layout-prop'></a><b>autoLayout Config</b>
+
+自动布局的配置
+
+|       参数      |    说明    |               类型              | 默认值 |
+|:---------------:|:----------:|:-------------------------------:|:-----:|
+|    enable    |   是否开启自动布局  | <font color="c41d7f">boolean</font> |   -   |
+| isAlways | 否添加节点后就重新布局 | <font color="c41d7f">boolean</font> |   -   |
+| config | 算法配置 | <font color="c41d7f">{ }</font> |   -   |
 
 <br>
 
