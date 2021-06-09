@@ -82,6 +82,7 @@ the configuration of canvas
 | endpointTipsRender |  rendering tooltips of endpoint  |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 |       minimap      |      whether to show minimap     | [minimap Prop](#minimap-prop)<font color="c41d7f"> { }</font> |                 -                 |
 |       delayDraw      |      Delayed rendering. This component must ensure that the canvas container rendering (including animation execution) is completed before rendering, otherwise the coordinates will be offset, for example：Animation of Ant Design Modal     | <font color="c41d7f"> number</font> |                 0                 |
+|       autoLayout      |    custom layout    | [autoLayout Prop](#auto-layout-prop)<font color="c41d7f"> {}</font> |                 -               |
 
 
 <br>
@@ -105,6 +106,18 @@ the configuration of minimap
 |:--------:|:-----------------------:|:---------------------------------------------------------------------------:|:-------:|
 |  enable  | whether to show minimap |                     <font color="c41d7f">boolean</font>                     |    -    |
 |  config  |  the config of minimap  | [minimap Config Prop](#minimap-config-prop)<font color="c41d7f"> { }</font> |    -    |
+
+<br>
+
+### <a name='auto-layout-prop'></a><b>autoLayout Config</b>
+
+the custom layout config
+
+| Property |       Description       |   Type         | Default |
+|:--------:|:-----------------------:|:-------------------------------:|:-------:|
+|    enable    |   whether to enable custom layout  | <font color="c41d7f">boolean</font> |   -   |
+| isAlways | whether to rearrange the layout after adding nodes | <font color="c41d7f">boolean</font> |   -   |
+| config | algorithm configuration | <font color="c41d7f">{ }</font> |   -   |
 
 <br>
 
