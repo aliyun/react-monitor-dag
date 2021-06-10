@@ -28,6 +28,10 @@ export default class ScheduleNode extends Node {
       _dom = $('<div></div>')
         .attr('class', 'node schedule-node')
         .attr('id', obj.name);
+      let _className = _.get(obj, 'options.className');
+      if (_className) {
+        $(_dom).addClass(_className);
+      }
     }
     const node = $(_dom);
     // 计算节点坐标
