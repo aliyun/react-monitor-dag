@@ -49,7 +49,6 @@ npm install react-monitor-dag
 | onContextmenuEdge |                    右键线段事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
 | onContextmenuGroup |                    右键group事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
 | onChangePage |                    单击group分页事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
-                    -                         |
 
 <br>
 
