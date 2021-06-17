@@ -25,13 +25,18 @@ import * as _ from 'lodash';
 
 
 export let transformInitData = (info) => {
-  let {data, config, nodeMenu, edgeMenu,groupMenu, registerStatus} = info;
+  let {
+    data, config, nodeMenu,
+    edgeMenu,groupMenu, registerStatus,
+    nodeMenuClassName
+  } = info;
   
   let nodes = (data.nodes || []).map((item) => {
     return _.assign(item, {
       _config: config,
       _menu: nodeMenu,
       _registerStatus: registerStatus,
+      _nodeMenuClassName: nodeMenuClassName,
       Class: ScheduleNode
     });
   });

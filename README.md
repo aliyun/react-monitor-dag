@@ -35,7 +35,8 @@ npm install react-monitor-dag
 |       width       |                     组件宽度                     |         <font color="c41d7f">number &#124; string</font>        |                         -                         |
 |       height      |                     组件高度                     |        <font color="c41d7f">number &#124; string </font>        |                         -                         |
 |     className     |                     组件类名                     |                <font color="c41d7f">string</font>               |                         -                         |
-|      nodeMenu     |                  节点右键菜单配置                 | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; </font> |                        [ ]                        |
+|      nodeMenu     |                  节点右键菜单配置                 | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62;  &#124; (node) => Array&#60; [menu](#menu-type)&#62;</font>  |    -                    |
+|      nodeMenuClassName     |  节点右键菜单样式   |  string |    -                     |
 |      edgeMenu     |                  线段右键菜单配置                 | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; </font> |                        [ ]                        |
 |       config      |      组件的画布配置，见[config Prop](#config)      |                 <font color="c41d7f">any </font>                |                         -                         |
 |      polling      |    组件的轮训属性配置，见[polling Prop](#polling)   |                <font color="c41d7f">object</font>               |                        { }                        |
