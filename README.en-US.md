@@ -35,7 +35,8 @@ npm install react-monitor-dag
 |       width       |                          component width                          |         <font color="c41d7f">number &#124; string</font>        |                                    -                                    |
 |       height      |                          component height                         |        <font color="c41d7f">number &#124; string </font>        |                                    -                                    |
 |     className     |                        component className                        |                <font color="c41d7f">string</font>               |                                    -                                    |
-|      nodeMenu     |                Node Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; </font> |                                   [ ]                                   |
+|      nodeMenu     |                Node Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu](#menu-type)&#62; &#124; (node) =>  Array&#60; [menu](#menu-type)&#62; </font> |                                   -                                   |
+|  nodeMenuClassName  |   Node Right-click Menu classname     |    <font color="c41d7f">string</font>    |    -    |
 |      edgeMenu     |                Edge Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu]
 |      groupMenu     |                Group Right-click Menu Configuration                | <font color="c41d7f">Array&#60; [menu]
 (#menu-type)&#62; </font> |                                   [ ]                                   |

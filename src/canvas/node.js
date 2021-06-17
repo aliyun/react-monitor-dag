@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import * as ReactDOM from 'react-dom';
 import RightMenuGen from './right-menu';
 import { Tips } from 'butterfly-dag';
-
+import getType from './../utils/getType';
 export default class ScheduleNode extends Node {
   constructor(opts) {
     super(opts);
@@ -164,12 +164,13 @@ export default class ScheduleNode extends Node {
   }
   // 生成右键菜单
   _createRightMenu() {
-    let menus = _.get(this, 'options._menu', []);
-    if (menus.length > 0) {
+    let menus = _.get(this, 'options._menu');
+    let nodeMenuClassName = _.get(this, 'options._nodeMenuClassName', '');
+    if(['function', 'array'].includes(getType(menus))) {
       $(this.dom).contextmenu((e) => {
         e.preventDefault();
         e.stopPropagation();
-        RightMenuGen(this.dom, 'node', [e.clientX, e.clientY], menus, this.options);
+        RightMenuGen(this.dom, 'node', [e.clientX, e.clientY], menus, this.options, nodeMenuClassName);
         this.emit('custom.node.rightClick', {
           node: this
         });

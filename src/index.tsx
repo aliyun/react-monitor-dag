@@ -59,7 +59,8 @@ interface ComProps {
   width?: number | string,             // 组件宽
   height?: number | string,            // 组件高
   className?: string,                  // 组件classname
-  nodeMenu: Array<menu>,               // 节点右键菜单配置
+  nodeMenu: Array<menu> | ((node) => Array<menu>), // 节点右键菜单配置
+  nodeMenuClassName?: string,              //  节点菜单样式
   edgeMenu: Array<menu>,            // 线段右键菜单配置
   groupMenu: Array<menu>,              // group右键配置
   config?: config,                        // 画布配置
@@ -139,6 +140,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       nodeMenu: this.props.nodeMenu,
       edgeMenu: this.props.edgeMenu,
       groupMenu: this.props.groupMenu,
+      nodeMenuClassName: this.props.nodeMenuClassName,
       data: _.cloneDeep(this.props.data || {nodes: [], edges: [], groups: []}),
       registerStatus: _.cloneDeep(this.props.registerStatus)
     });
