@@ -250,6 +250,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       nodeMenu: this.props.nodeMenu,
       edgeMenu: this.props.edgeMenu,
       groupMenu: this.props.groupMenu,
+      nodeMenuClassName: this.props.nodeMenuClassName,
       data: _.cloneDeep(newProps.data),
       registerStatus: _.cloneDeep(newProps.registerStatus)
     });
