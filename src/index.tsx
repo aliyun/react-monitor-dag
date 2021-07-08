@@ -23,6 +23,7 @@ interface config {
   showActionIcon?: boolean,// 是否操作icon：放大，缩小，聚焦
   focusCenter?: boolean, //是否初始化的时候把所有节点居中
   draggable?: boolean, // 是否允许节点拖拽
+  diffOptions?: Array<string>, // 更新节点时，需要diff的字段集合（默认节点diff节点id）
   edge?: {        //定制线段的类型，todo需要思考
     type: string,
     config: any,
@@ -254,12 +255,22 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       data: _.cloneDeep(newProps.data),
       registerStatus: _.cloneDeep(newProps.registerStatus)
     });
-    let diffInfo = diffPropsData(result, this.canvasData);
+    let diffInfo = diffPropsData(result, this.canvasData, _.get(this, 'props.config.diffOptions', []));
+    if (diffInfo.rmNodes.length > 0) {
+      this.canvas.removeNodes(diffInfo.rmNodes.map(item => item.id));
+    }
     if (diffInfo.addNodes.length > 0) {
       this.canvas.addNodes(diffInfo.addNodes);
     }
-    if (diffInfo.rmNodes.length > 0) {
-      this.canvas.removeNodes(diffInfo.rmNodes.map(item => item.id));
+    if(diffInfo.updateNodes.length > 0) {
+      let removeData = this.canvas.removeNodes(diffInfo.updateNodes.map(item => item.id), false, true);
+      let _addNodes = this.canvas.addNodes(diffInfo.updateNodes, true);
+      _addNodes.forEach(item => {
+        item.mounted && item.mounted();
+      });
+      this.canvas.addEdges(removeData.edges.map(edge => {
+        return edge.options;
+      }), true);
     }
     if (diffInfo.addEdges.length > 0) {
       this.canvas.addEdges(diffInfo.addEdges);
