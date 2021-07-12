@@ -73,13 +73,21 @@ export let transformInitData = (info) => {
   }
 }
 
-export let diffPropsData = (newData, oldData) => {
+export let diffPropsData = (newData, oldData, diffOptions = []) => {
+  let updateNodes = [];
   let addNodes = _.differenceWith(newData.nodes, oldData.nodes, (a, b) => {
     return a.id === b.id;
   });
   let rmNodes = _.differenceWith(oldData.nodes, newData.nodes, (a, b) => {
     return a.id === b.id;
   });
+  if (diffOptions.length > 0) {
+    updateNodes = _.differenceWith(newData.nodes, oldData.nodes, (a, b) => {
+      return diffOptions.reduce((pre, cur) => {
+        return pre && a[cur] === b[cur];
+      }, a[diffOptions[0]] === b[diffOptions[0]]);
+    })
+  }
   let addEdges = _.differenceWith(newData.edges, oldData.edges, (a, b) => {
     return (
       a.sourceNode === b.sourceNode &&
@@ -112,6 +120,7 @@ export let diffPropsData = (newData, oldData) => {
   return {
     addNodes,
     rmNodes,
+    updateNodes,
     addEdges,
     rmEdges,
     updateStatus
