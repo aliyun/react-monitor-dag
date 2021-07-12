@@ -84,6 +84,7 @@ interface ComProps {
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
   onContextmenuGroup?(edge: any): void,           // 右键线段事件
   onChangePage?(data:any): void,                 // 分页事件
+  onLoaded?(data: any): void                              // 画布加载完成之后的回调
 }
 
 export default class MonitorDag extends React.Component<ComProps, any> {
@@ -178,7 +179,8 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     }
     this.canvas = new Canvas(canvasObj);
     setTimeout(() => {
-      this.canvas.draw(result, () => {
+      this.canvas.draw(result, (data) => {
+        this.props.onLoaded && this.props.onLoaded(data);
         let minimap = _.get(this, 'props.config.minimap', {});
         const minimapCfg = _.assign({}, minimap.config, {
           events: [
