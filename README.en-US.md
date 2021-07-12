@@ -85,6 +85,7 @@ the configuration of canvas
 |       delayDraw      |      Delayed rendering. This component must ensure that the canvas container rendering (including animation execution) is completed before rendering, otherwise the coordinates will be offset, for example：Animation of Ant Design Modal     | <font color="c41d7f"> number</font> |                 0                 |
 |       autoLayout      |    custom layout    | [autoLayout Prop](#auto-layout-prop)<font color="c41d7f"> {}</font> |                 -               |
 |  diffOptions | Collection of diff fields for node updates| Array&#60; string&#62; | - |
+|  onLoaded | canvas loaded event| (data: {nodes, edges, groups}) => {} | - |
 
 <br>
 

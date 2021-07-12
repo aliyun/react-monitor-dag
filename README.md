@@ -83,6 +83,8 @@ npm install react-monitor-dag
 |       delayDraw      |      是否延迟加载     | <font color="c41d7f"> number</font> |                 0                 |
 |       autoLayout      |      自定义布局     | [autoLayout Prop](#auto-layout-prop)<font color="c41d7f"> {}</font> |                 -               |
 |  diffOptions | 节点更新时diff的字段集合| Array&#60; string&#62; | - |
+|  onLoaded | 画布渲染之后的回调| (data: {nodes, edges, groups}) => {} | - |
+
 <br>
 
 ### <a name='edge-prop'></a><b>edge</b>
