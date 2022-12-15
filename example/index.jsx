@@ -71,7 +71,7 @@ const Demo = () => {
       focusCenter: true,
       direction: 'top-bottom',
       autoLayout: {
-        enable: false,
+        enable: true,
         isAlways: false,
       },
       labelRender: (label, info) => {
@@ -105,9 +105,15 @@ const Demo = () => {
       endpointTipsRender: (pointOpts) => {
         return <span>自定义锚点tips</span>
       },
+      // onSearchGroup: (keywork, nodeList) => {
+      //   console.log(keywork);
+      //   console.log(nodeList);
+      //   return nodeList;
+      // },
       group: {
+        enableSearch: true,
         enablePagination: true,
-        enableSearch: true
+        pageSize: 10
       },
       minimap: {
         enable: true,

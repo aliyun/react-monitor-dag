@@ -19,6 +19,14 @@ class BaseGroup extends Group {
   constructor(opts) {
     super(opts);
     this._enableSearch = opts.enableSearch;
+    this._enablePagination = opts._enablePagination;
+    this._pageSize = opts._pageSize;
+    this._pageNum = opts._pageNum;
+    this._totolNum = opts._totolNum;
+    this._showNodeList = opts._showNodeList;
+    this._allNodeList = opts._allNodeList;
+    this._searchNodesList = [];
+    this._keyword = '';
   }
   draw(obj) {
     let _dom = obj.dom;
@@ -48,6 +56,11 @@ class BaseGroup extends Group {
       this._createSearch(titleContainer);
     }
 
+    // 添加分页
+    if(this._enablePagination) {
+      this._createPagination(this._container);
+    }
+
     group.append(this._container);
     return _dom;
   }
@@ -72,6 +85,7 @@ class BaseGroup extends Group {
     }
   }
 
+  // 生成搜索
   _createSearch (container = []) {
     let searchDom = [
       `<input placeholder="请输入" class="group-search-input" />`
@@ -92,12 +106,92 @@ class BaseGroup extends Group {
     })
   }
   _searchNodes(text) {
-    let focusNodes = this.nodes.filter((item) => {
-      return _.get(item, 'options.title', '').indexOf(text) !== -1;
+
+    let result = [];
+    if (!!text) {
+      if (this._onSearchGroup) {
+        result = this._onSearchGroup(text, this._allNodeList);
+      } else {
+        result = this._allNodeList.filter((item) => {
+          return (item.title || '').indexOf(text) !== -1;
+        });
+      }
+    } else {
+      result = this._allNodeList;
+    }
+
+    this._searchNodesList = result;
+    this._keyword = text;
+    this._pageNum = 1;
+    this._totolNum = this._searchNodesList.length;
+    this._showNodeList = this._searchNodesList.slice((this._pageNum - 1) * this._pageSize, this._pageNum * this._pageSize);
+    this.emit('custom.groups.changePage', {
+      group: this
     });
-    this.emit('custom.group.search', {
-      nodes: focusNodes
-    })
+    // let resultNode = this.nodes.filter((item) => {
+    //   console.log(item);
+    //   return _.get(item, 'options.title', '').indexOf(text) !== -1;
+    // });
+    // this.emit('custom.group.search', {
+    //   nodes: focusNodes
+    // })
+  }
+
+  _createPagination(container = this._container) {
+    let paginationDom = [
+      '<div class="pagination-con">',
+        '<span class="pre-page"><</span>',
+        '<span class="next-page">></span>',
+        `<span class="total-num"></span>`,
+      '</div>'
+    ].join('');
+
+    paginationDom = $(paginationDom);
+    $(container).append(paginationDom);
+
+    paginationDom.find('.pre-page').on('click', () => {
+      if (this._pageNum === 1) {
+        return;
+      }
+      this._pageNum --;
+      let _allNodeList = !!this._keyword ? this._searchNodesList : this._allNodeList;
+      this._showNodeList = _allNodeList.slice((this._pageNum - 1) * this._pageSize, this._pageNum * this._pageSize);
+
+      this.emit('custom.groups.changePage', {
+        group: this
+      });
+
+    });
+
+    paginationDom.find('.next-page').on('click', () => {
+      let _allNodeList = !!this._keyword ? this._searchNodesList : this._allNodeList;
+      let _lastPage = parseInt(_allNodeList.length / this._pageSize);
+      if (_allNodeList.length % this._pageSize !== 0) {
+        _lastPage ++;
+      }
+
+      if (this._pageNum === _lastPage) {
+        return;
+      }
+      this._pageNum ++;
+      this._showNodeList = _allNodeList.slice((this._pageNum - 1) * this._pageSize, this._pageNum * this._pageSize);
+      
+      this.emit('custom.groups.changePage', {
+        group: this
+      });
+    });
+
+    this._updateTotalCnt();
+  }
+
+  _updateTotalCnt () {
+    let dom = $(this._container).find('.total-num');
+    let _allNodeList = !!this._keyword ? this._searchNodesList : this._allNodeList;
+    let _cnt = parseInt(_allNodeList.length / this._pageSize);
+    if (_allNodeList.length % this._pageSize !== 0) {
+      _cnt ++;
+    }
+    dom.text(`共${_cnt}页`);
   }
 }
 export default BaseGroup;

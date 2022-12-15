@@ -8,6 +8,7 @@ import 'butterfly-dag/dist/index.css';
 import Canvas from './canvas/canvas';
 import Edge from './canvas/edge';
 import {transformInitData, diffPropsData} from './adaptor';
+import AutoLayout from './utils/layout';
 
 // 右键菜单配置
 interface menu {
@@ -30,6 +31,8 @@ interface config {
   },
   group?: {
     enableSearch: boolean,       // 是否开启节点组搜索节点
+    pageSize: number,            // 每页的数量
+    rowCnt: number               // 节点组每行展示多少个节点
   },
   statusNote?: {
     enable: boolean,
@@ -42,6 +45,7 @@ interface config {
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
   nodeRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
+  onSearchGroup?(keywork: string, nodeList: any)
   autoLayout?: {
     enable: boolean,   // 是否开启自动布局
     isAlways: boolean, // 是否添加节点后就重新布局, todo
@@ -164,20 +168,43 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           arrowOffset: _.get(this, 'props.config.edge.config.arrowPosition', -8),
           Class: Edge
         },
+      },
+      extraConfig: {
+        group: {
+          enablePagination: _.get(this, 'props.config.group.enablePagination', true),
+          pageSize: _.get(this, 'props.config.group.pageSize', 20),
+          rowCtn: _.get(this.props, 'config.group.rowCnt', 5),
+          onSearchGroup: _.get(this.props, 'config.onSearchGroup'),
+        }
       }
     });
 
-    if (_.get(this.props, 'config.autoLayout.enable', false)) {
-      canvasObj['layout'] = {
-        type: 'dagreLayout',
-        options: {
-          rankdir: _.get(this.props, 'config.direction', 'top-bottom') === 'top-bottom' ? 'TB' : 'LR',
-          nodesep: 40,
-          ranksep: 40
-        }
-      };
-    }
     this.canvas = new Canvas(canvasObj);
+
+    if (_.get(this.props, 'config.autoLayout.enable', false)) {
+      let data = AutoLayout(result, {
+        rankdir: _.get(this.props, 'config.direction', 'top-bottom') === 'top-bottom' ? 'TB' : 'LR',
+        align: _.get(this.canvas.layout, 'options.align'),
+        nodeSize: _.get(this.canvas.layout, 'options.nodeSize'),
+        nodesepFunc: _.get(this.canvas.layout, 'options.nodesepFunc'),
+        ranksepFunc: _.get(this.canvas.layout, 'options.ranksepFunc'),
+        nodesep: _.get(this.canvas.layout, 'options.nodesep') || 50,
+        ranksep: _.get(this.canvas.layout, 'options.ranksep') || 50,
+        controlPoints: _.get(this.canvas.layout, 'options.controlPoints') || false,
+      }, {
+        rowCtn: _.get(this.props, 'config.group.rowCnt')
+      });
+
+      // canvasObj['layout'] = {
+      //   type: 'dagreLayout',
+      //   options: {
+      //     rankdir: _.get(this.props, 'config.direction', 'top-bottom') === 'top-bottom' ? 'TB' : 'LR',
+      //     nodesep: 40,
+      //     ranksep: 40
+      //   }
+      // };
+    }
+
     setTimeout(() => {
       this.canvas.draw(result, (data) => {
         this.props.onLoaded && this.props.onLoaded(data);
@@ -237,11 +264,6 @@ export default class MonitorDag extends React.Component<ComProps, any> {
 
     this.canvas.on('custom.groups.rightClick', (data: any) => {
       this.props.onContextmenuGroup && this.props.onContextmenuGroup(data.groups);
-    });
-
-    this.canvas.on('custom.group.search', (data: any) => {
-      let nodes = data.nodes;
-      this._focusNode(nodes);
     });
     
     // 检测轮训
