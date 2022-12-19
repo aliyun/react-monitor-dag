@@ -18,6 +18,7 @@ import RightMenuGen from './right-menu';
 class BaseGroup extends Group {
   constructor(opts) {
     super(opts);
+    this._titleContainer = null;
     this._enableSearch = opts.enableSearch;
     this._enablePagination = opts._enablePagination;
     this._pageSize = opts._pageSize;
@@ -58,10 +59,14 @@ class BaseGroup extends Group {
 
     // 添加分页
     if(this._enablePagination) {
-      this._createPagination(this._container);
+      this._createPagination(titleContainer);
     }
 
     group.append(this._container);
+
+    this._titleContainer = titleContainer;
+    console.log(this._titleContainer);
+
     return _dom;
   }
 
@@ -137,12 +142,12 @@ class BaseGroup extends Group {
     // })
   }
 
-  _createPagination(container = this._container) {
+  _createPagination(container = this._titleContainer) {
     let paginationDom = [
       '<div class="pagination-con">',
         '<span class="pre-page"><</span>',
-        '<span class="next-page">></span>',
         `<span class="total-num"></span>`,
+        '<span class="next-page">></span>',
       '</div>'
     ].join('');
 
@@ -181,17 +186,17 @@ class BaseGroup extends Group {
       });
     });
 
-    this._updateTotalCnt();
+    this._updateTotalCnt(container);
   }
 
-  _updateTotalCnt () {
-    let dom = $(this._container).find('.total-num');
+  _updateTotalCnt (container = this._titleContainer) {
+    let dom = $(container).find('.total-num');
     let _allNodeList = !!this._keyword ? this._searchNodesList : this._allNodeList;
     let _cnt = parseInt(_allNodeList.length / this._pageSize);
     if (_allNodeList.length % this._pageSize !== 0) {
       _cnt ++;
     }
-    dom.text(`共${_cnt}页`);
+    dom.text(`${this._pageNum} / ${_cnt}`);
   }
 }
 export default BaseGroup;

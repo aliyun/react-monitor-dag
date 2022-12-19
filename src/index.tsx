@@ -209,7 +209,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     setTimeout(() => {
       this.canvas.draw(result, (data) => {
         this.props.onLoaded && this.props.onLoaded(data);
-        let minimap = _.get(this, 'props.config.minimap', {});
+        let minimap:any = _.get(this, 'props.config.minimap', {});
         const minimapCfg = _.assign({}, minimap.config, {
           events: [
             'system.node.click',
