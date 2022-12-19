@@ -100,6 +100,19 @@ the configuration of edge
 
 <br>
 
+### <a name='group-prop'></a><b>group</b>
+
+the configuration of group
+
+|  Property  |   Description   |                Type                | Default |
+|:------:|:--------:|:----------------------------------:|:-----:|
+|  enableSearch  | whether to enable the node group search node | <font color="c41d7f">boolean</font> |   false   |
+| enablePagination | whether to turn on the page |  <font color="c41d7f"> boolean </font>  |   true   |
+| pageSize | nmber of per page |  <font color="c41d7f"> number </font>  |   20   |
+| rowCnt | the number of nodes are displayed in each row of the node group |  <font color="c41d7f"> number </font>  |   5   |
+
+<br>
+
 ### <a name='minimap-prop'></a><b>minimap</b>
 
 the configuration of minimap

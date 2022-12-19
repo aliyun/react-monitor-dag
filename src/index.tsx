@@ -31,6 +31,7 @@ interface config {
   },
   group?: {
     enableSearch: boolean,       // 是否开启节点组搜索节点
+    enablePagination: boolean,   // 是否开启翻页
     pageSize: number,            // 每页的数量
     rowCnt: number               // 节点组每行展示多少个节点
   },
@@ -45,7 +46,7 @@ interface config {
   },
   labelRender?(label: string): JSX.Element,  // 自定义label样式，没定义使用默认样式
   nodeRender?(data: any): JSX.Element,      // 自定义节点样式，没定义使用默认样式
-  onSearchGroup?(keywork: string, nodeList: any)
+  onSearchGroup?(keyword: string, nodeList: any)
   autoLayout?: {
     enable: boolean,   // 是否开启自动布局
     isAlways: boolean, // 是否添加节点后就重新布局, todo

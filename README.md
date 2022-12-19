@@ -74,6 +74,7 @@ npm install react-monitor-dag
 |:------------------:|:---------------------:|:-------------------------------------------------------------:|:---------------------------------:|
 |      direction     |        图的方向        |               <font color="c41d7f">string</font>              | `left-right` &#124; `top-bottom` |
 |        edge        |      定制线段的类型     |    [edge Prop](#edge-prop)<font color="c41d7f"> { }</font>    |                 -                 |
+|        group        |      定制节点组的类型     |    [group Prop](#group-prop)<font color="c41d7f"> { }</font>    |                 -                 |
 |     labelRender    |   线段label的渲染方法   |          <font color="c41d7f">(label) => void</font>          |                 -                 |
 |   labelTipsRender  | 线段label tips的渲染方法 |           <font color="c41d7f">(data) => void</font>          |                 -                 |
 |     nodeRender     |      节点的渲染方法     |           <font color="c41d7f">(data) => void</font>          |                 -                 |
@@ -98,6 +99,19 @@ npm install react-monitor-dag
 
 <br>
 
+### <a name='group-prop'></a><b>group</b>
+
+定制线段属性
+
+|  参数  |   说明   |                类型                | 默认值 |
+|:------:|:--------:|:----------------------------------:|:-----:|
+|  enableSearch  | 是否开启节点组搜索节点 | <font color="c41d7f">boolean</font> |   false   |
+| enablePagination | 是否开启翻页 |  <font color="c41d7f"> boolean </font>  |   true   |
+| pageSize | 每页的数量 |  <font color="c41d7f"> number </font>  |   20   |
+| rowCnt | 节点组每行展示多少个节点 |  <font color="c41d7f"> number </font>  |   5   |
+
+<br>
+
 ### <a name='minimap-prop'></a><b>minimap</b>
 
 缩略图属性
@@ -108,6 +122,7 @@ npm install react-monitor-dag
 | config |  缩略图的配置 | [minimap Config Prop](#minimap-config-prop)<font color="c41d7f"> { }</font> |   -   |
 
 <br>
+
 
 ### <a name='minimap-config-prop'></a><b>minimap Config</b>
 
