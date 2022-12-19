@@ -112,7 +112,12 @@ export default class ScheduleNode extends Node {
     let nodeRender = _.get(this, 'options._config.nodeRender');
     ReactDOM.render(
       nodeRender(this.options),
-      container[0]
+      container[0],
+      () => {
+        (this.endpoints || []).forEach((item) => {
+          item.updatePos();
+        })
+      }
     );
   }
   // 生成锚点

@@ -60,6 +60,42 @@ export default {
       }]
     },
     {
+      id: '21',
+      top: 550,
+      left: 500,
+      title: '自定义21',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'other',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      },{
+        id: 'bottom',
+        orientation: [0, 1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
+      id: '22',
+      top: 550,
+      left: 500,
+      title: '自定义21',
+      className: 'icon-background-color',
+      iconType: 'icon-kaifa',
+      status: 'other',
+      endpoints: [{
+        id: 'top',
+        orientation: [0, -1],
+        pos: [0.5, 0]
+      },{
+        id: 'bottom',
+        orientation: [0, 1],
+        pos: [0.5, 0]
+      }]
+    },
+    {
       id: '7',
       title: '某某算法11',
       className: 'icon-background-color',
@@ -257,6 +293,24 @@ export default {
       type: 'endpoint',
       arrowPosition: 0.5,
     },
+    {
+      source: '5',
+      target: '21',
+      sourceNode: '5',
+      targetNode: '21',
+      arrow: true,
+      type: 'endpoint',
+      arrowPosition: 0.5,
+    },
+    {
+      source: 'groupBottom',
+      target: 'top',
+      sourceNode: 'group',
+      targetNode: '22',
+      arrow: true,
+      type: 'endpoint',
+      arrowPosition: 0.5,
+    }
   ],
   groups: [{
     id: 'group',
@@ -265,7 +319,7 @@ export default {
     },
     top: 650,
     left: 300,
-    width: 500,
+    width: 820,
     height: 300,
     resize: true,
     // draggable: false,
