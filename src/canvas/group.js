@@ -65,7 +65,6 @@ class BaseGroup extends Group {
     group.append(this._container);
 
     this._titleContainer = titleContainer;
-    console.log(this._titleContainer);
 
     return _dom;
   }
