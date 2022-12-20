@@ -149,7 +149,8 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       groupMenu: this.props.groupMenu,
       nodeMenuClassName: this.props.nodeMenuClassName,
       data: _.cloneDeep(this.props.data || {nodes: [], edges: [], groups: []}),
-      registerStatus: _.cloneDeep(this.props.registerStatus)
+      registerStatus: _.cloneDeep(this.props.registerStatus),
+      groupCfg: _.get(this, 'props.config.group'),
     });
     let canvasObj = ({
       root: root,
@@ -174,7 +175,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         group: {
           enablePagination: _.get(this, 'props.config.group.enablePagination', true),
           pageSize: _.get(this, 'props.config.group.pageSize', 20),
-          rowCtn: _.get(this.props, 'config.group.rowCnt', 5),
+          rowCnt: _.get(this.props, 'config.group.rowCnt', 5),
           onSearchGroup: _.get(this.props, 'config.onSearchGroup'),
         }
       }
@@ -193,17 +194,9 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         ranksep: _.get(this.canvas.layout, 'options.ranksep') || 50,
         controlPoints: _.get(this.canvas.layout, 'options.controlPoints') || false,
       }, {
-        rowCtn: _.get(this.props, 'config.group.rowCnt')
+        rowCnt: _.get(this.props, 'config.group.rowCnt')
       });
 
-      // canvasObj['layout'] = {
-      //   type: 'dagreLayout',
-      //   options: {
-      //     rankdir: _.get(this.props, 'config.direction', 'top-bottom') === 'top-bottom' ? 'TB' : 'LR',
-      //     nodesep: 40,
-      //     ranksep: 40
-      //   }
-      // };
     }
 
     setTimeout(() => {
@@ -278,9 +271,16 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       groupMenu: this.props.groupMenu,
       nodeMenuClassName: this.props.nodeMenuClassName,
       data: _.cloneDeep(newProps.data),
-      registerStatus: _.cloneDeep(newProps.registerStatus)
+      registerStatus: _.cloneDeep(newProps.registerStatus),
+      groupCfg: _.get(newProps, 'config.group'),
     });
     let diffInfo = diffPropsData(result, this.canvasData, _.get(this, 'props.config.diffOptions', []));
+    if (diffInfo.rmGroups.length > 0) {
+      this.canvas.removeGroups(diffInfo.rmNodes.map(item => item.id));
+    }
+    if (diffInfo.addGroups.length > 0) {
+      this.canvas.addGroups(diffInfo.addGroups);
+    }
     if (diffInfo.rmNodes.length > 0) {
       this.canvas.removeNodes(diffInfo.rmNodes.map(item => item.id));
     }
@@ -312,18 +312,20 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       });
     }
 
+    this.canvasData = result;
+
     if (
       _.get(this.props, 'config.autoLayout.isAlways', false) && (
         diffInfo.addNodes.length > 0 ||
         diffInfo.rmNodes.length > 0 ||
         diffInfo.addEdges.length > 0 ||
-        diffInfo.rmEdges.length > 0
+        diffInfo.rmEdges.length > 0 ||
+        diffInfo.addGroups.length > 0 ||
+        diffInfo.rmGroups.length > 0
       )
     ) {
       this.canvas.redraw();
     }
-
-    this.canvasData = result;
 
     // 检测轮训
     this._polling(newProps.polling);

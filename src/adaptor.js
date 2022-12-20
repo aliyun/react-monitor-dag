@@ -28,7 +28,7 @@ export let transformInitData = (info) => {
   let {
     data, config, nodeMenu,
     edgeMenu,groupMenu, registerStatus,
-    nodeMenuClassName
+    nodeMenuClassName, groupCfg = {}
   } = info;
   
   let nodes = (data.nodes || []).map((item) => {
@@ -66,6 +66,52 @@ export let transformInitData = (info) => {
     });
   });
 
+
+  // group的分页处理
+  let _groupEnablePagination = groupCfg.enablePagination;
+  let _groupPageSize = groupCfg.pageSize || 20;
+  if (_groupEnablePagination && groups && groups.length > 0) {
+
+    let _groupsObj = {};
+    let _groupHiddenNodes = {};
+
+    for(let i = 0; i < groups.length; i++) {
+      let _group = groups[i];
+      if (!_groupsObj[_group.id]) {
+        _groupsObj[_group.id] = [];
+      }
+    }
+    for(let i = 0; i < nodes.length; i++) {
+      let _node = nodes[i];
+      if (_node.group) {
+        _groupsObj[_node.group].push(_node);
+      }
+    }
+
+    groups.forEach((item) => {
+      let _nodes = _groupsObj[item.id];
+      item._enablePagination = _groupEnablePagination;
+      item._allNodeList = item._showNodeList = _nodes;
+      item._pageSize = _groupPageSize;
+      item._pageNum = 1;
+      item._totolNum = _nodes.length;
+    });
+
+    let _rmNodes = [];
+    for(let key in _groupsObj) {
+      let _group = _groupsObj[key];
+      _rmNodes = _rmNodes.concat(_group.slice(_groupPageSize, _group.length));
+    }
+    
+    nodes = nodes.filter((item) => {
+      let isRmNode = _.some(_rmNodes, (node) => node.id === item.id);
+      if (isRmNode) {
+        _groupHiddenNodes[item.id] = item;
+      }
+      return !isRmNode;
+    });
+  }
+
   return {
     nodes,
     edges,
@@ -81,6 +127,13 @@ export let diffPropsData = (newData, oldData, diffOptions = []) => {
   let rmNodes = _.differenceWith(oldData.nodes, newData.nodes, (a, b) => {
     return a.id === b.id;
   });
+  let addGroups = _.differenceWith(newData.groups, oldData.groups, (a, b) => {
+    return a.id === b.id;
+  });
+  let rmGroups = _.differenceWith(oldData.groups, newData.groups, (a, b) => {
+    return a.id === b.id;
+  });
+
   if (diffOptions.length > 0) {
     updateNodes = _.differenceWith(newData.nodes, oldData.nodes, (a, b) => {
       return diffOptions.reduce((pre, cur) => {
@@ -118,6 +171,8 @@ export let diffPropsData = (newData, oldData, diffOptions = []) => {
   });
 
   return {
+    addGroups,
+    rmGroups,
     addNodes,
     rmNodes,
     updateNodes,

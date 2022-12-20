@@ -1,6 +1,6 @@
 'use strict';
 import { Canvas, Layout } from 'butterfly-dag';
-import {Node} from './node';
+import AutoLayout from '../utils/layout';
 
 export default class MonitorCanvas extends Canvas {
   constructor(opts) {
@@ -9,7 +9,7 @@ export default class MonitorCanvas extends Canvas {
     // group的分页处理
     this._groupEnablePagination = opts.extraConfig.group.enablePagination
     this._groupPageSize = opts.extraConfig.group.pageSize;
-    this._groupRowCnt = opts.extraConfig.group.rowCtn;
+    this._groupRowCnt = opts.extraConfig.group.rowCnt;
     this._onSearchGroup = opts.extraConfig.group.onSearchGroup;
   }
   _addEventListener() {
@@ -23,64 +23,30 @@ export default class MonitorCanvas extends Canvas {
     result._onSearchGroup = this._onSearchGroup;
     return result;
   }
-  draw(opts, callback) {
-
-    // group的分页处理
-    if (this._groupEnablePagination && opts.groups && opts.groups.length > 0) {
-
-      let _groupsObj = {};
-      let _groupHiddenNodes = {};
-
-      for(let i = 0; i < opts.groups.length; i++) {
-        let _group = opts.groups[i];
-        if (!_groupsObj[_group.id]) {
-          _groupsObj[_group.id] = [];
-        }
-      }
-      for(let i = 0; i < opts.nodes.length; i++) {
-        let _node = opts.nodes[i];
-        if (_node.group) {
-          _groupsObj[_node.group].push(_node);
-        }
-      }
-
-      opts.groups.forEach((item) => {
-        let nodes = _groupsObj[item.id];
-        item._enablePagination = this._groupEnablePagination;
-        item._allNodeList = item._showNodeList = nodes;
-        item._pageSize = this._groupPageSize;
-        item._pageNum = 1;
-        item._totolNum = nodes.length;
-      });
-
-      let _rmNodes = [];
-      for(let key in _groupsObj) {
-        let _group = _groupsObj[key];
-        _rmNodes = _rmNodes.concat(_group.slice(this._groupPageSize, _group.length));
-      }
-      
-      opts.nodes = opts.nodes.filter((item) => {
-        let isRmNode = _.some(_rmNodes, (node) => node.id === item.id);
-        if (isRmNode) {
-          _groupHiddenNodes[item.id] = item;
-        }
-        return !isRmNode;
-      });
-    }
-
-    super.draw(opts, callback);
-  }
   redraw() {
     let nodes = this.nodes.map((item) => {
       return item.options;
     });
-    let edges = this.edges.map((item) => {
+    let groups = this.groups.map((item) => {
       return {
-        source: item.sourceNode.id,
-        target: item.targetNode.id
+        id: item.id,
+        width: item.width,
+        height: item.height,
+        isGroup: true
       }
     });
-    Layout.dagreLayout({
+    let edges = this.edges.map((item) => {
+      return {
+        sourceNode: item.sourceNode.id,
+        targetNode: item.targetNode.id
+      }
+    });
+
+    AutoLayout({
+      nodes: nodes,
+      groups: groups,
+      edges: edges
+    }, {
       rankdir: _.get(this.layout, 'options.rankdir') || 'TB',
       align: _.get(this.layout, 'options.align'),
       nodeSize: _.get(this.layout, 'options.nodeSize'),
@@ -89,14 +55,10 @@ export default class MonitorCanvas extends Canvas {
       nodesep: _.get(this.layout, 'options.nodesep') || 50,
       ranksep: _.get(this.layout, 'options.ranksep') || 50,
       controlPoints: _.get(this.layout, 'options.controlPoints') || false,
-      data: {
-        nodes: nodes,
-        edges: edges.map(item => ({
-          source: item.type === 'endpoint' ? item.sourceNode : item.source,
-          target: item.type === 'endpoint' ? item.targetNode : item.target
-        }))
-      }
+    }, {
+      rowCnt: this._groupRowCnt
     });
+
     this.nodes.forEach((item, index) => {
       let newLeft = nodes[index].left;
       let newTop = nodes[index].top;
@@ -106,6 +68,18 @@ export default class MonitorCanvas extends Canvas {
         item.moveTo(newLeft, newTop);
       }
     });
+
+    this.groups.forEach((item, index) => {
+      let newLeft = groups[index].left;
+      let newTop = groups[index].top;
+      if (item.top !== newTop || item.left !== newLeft) {
+        item.options.top = newTop;
+        item.options.left = newLeft;
+        item.moveTo(newLeft, newTop);
+      }
+    });
+
+
     this.focusCenterWithAnimate();
   }
 
