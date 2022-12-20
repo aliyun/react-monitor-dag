@@ -1,6 +1,6 @@
 'use strict';
 import { Canvas, Layout } from 'butterfly-dag';
-import AutoLayout from '../utils/layout';
+import AutoLayout, {calcGroupNodesPos} from '../utils/layout';
 
 export default class MonitorCanvas extends Canvas {
   constructor(opts) {
@@ -11,6 +11,7 @@ export default class MonitorCanvas extends Canvas {
     this._groupPageSize = opts.extraConfig.group.pageSize;
     this._groupRowCnt = opts.extraConfig.group.rowCnt;
     this._onSearchGroup = opts.extraConfig.group.onSearchGroup;
+    this._onChangePage = opts.extraConfig.onChangePage;
   }
   _addEventListener() {
     super._addEventListener();
@@ -97,20 +98,21 @@ export default class MonitorCanvas extends Canvas {
     });
 
     const ROW_CNT = this._groupRowCnt || 5;
-    showList.forEach((item, i) => {
-      let row = parseInt(i / ROW_CNT);
-      let col = i % ROW_CNT;
-      item.top = row * 50;
-      item.left = col * 160;
-    });
-    // 加group的padding
-    showList.forEach((item) => {
-      item.top += 50;
-      item.left += 10;
+    calcGroupNodesPos(showList, {
+      rowCnt: ROW_CNT
     });
 
     this.removeNodes(rmNodes, true);
     this.addNodes(addNodes, true);
+
+    this._onChangePage({
+      nodes: group._showNodeList,
+      groupObj: group,
+      pageNum: group._pageNum,
+      pageSize: group._pageSize,
+      totalNum: group._totalNum,
+      keyword: group._keyword
+    })
 
     group._updateTotalCnt();
   }

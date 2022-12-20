@@ -94,7 +94,7 @@ export let transformInitData = (info) => {
       item._allNodeList = item._showNodeList = _nodes;
       item._pageSize = _groupPageSize;
       item._pageNum = 1;
-      item._totolNum = _nodes.length;
+      item._totalNum = _nodes.length;
     });
 
     let _rmNodes = [];
