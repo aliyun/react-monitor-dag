@@ -23,7 +23,7 @@ class BaseGroup extends Group {
     this._enablePagination = opts._enablePagination;
     this._pageSize = opts._pageSize;
     this._pageNum = opts._pageNum;
-    this._totolNum = opts._totolNum;
+    this._totalNum = opts._totalNum;
     this._showNodeList = opts._showNodeList;
     this._allNodeList = opts._allNodeList;
     this._searchNodesList = [];
@@ -127,7 +127,7 @@ class BaseGroup extends Group {
     this._searchNodesList = result;
     this._keyword = text;
     this._pageNum = 1;
-    this._totolNum = this._searchNodesList.length;
+    this._totalNum = this._searchNodesList.length;
     this._showNodeList = this._searchNodesList.slice((this._pageNum - 1) * this._pageSize, this._pageNum * this._pageSize);
     this.emit('custom.groups.changePage', {
       group: this

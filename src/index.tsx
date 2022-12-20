@@ -172,6 +172,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         },
       },
       extraConfig: {
+        onChangePage: _.get(this, 'props.onChangePage', () => {}),
         group: {
           enablePagination: _.get(this, 'props.config.group.enablePagination', true),
           pageSize: _.get(this, 'props.config.group.pageSize', 20),
