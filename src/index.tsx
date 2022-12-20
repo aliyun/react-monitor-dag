@@ -175,7 +175,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         group: {
           enablePagination: _.get(this, 'props.config.group.enablePagination', true),
           pageSize: _.get(this, 'props.config.group.pageSize', 20),
-          rowCtn: _.get(this.props, 'config.group.rowCnt', 5),
+          rowCnt: _.get(this.props, 'config.group.rowCnt', 5),
           onSearchGroup: _.get(this.props, 'config.onSearchGroup'),
         }
       }
@@ -194,7 +194,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
         ranksep: _.get(this.canvas.layout, 'options.ranksep') || 50,
         controlPoints: _.get(this.canvas.layout, 'options.controlPoints') || false,
       }, {
-        rowCtn: _.get(this.props, 'config.group.rowCnt')
+        rowCnt: _.get(this.props, 'config.group.rowCnt')
       });
 
     }

@@ -9,7 +9,7 @@ export default class MonitorCanvas extends Canvas {
     // group的分页处理
     this._groupEnablePagination = opts.extraConfig.group.enablePagination
     this._groupPageSize = opts.extraConfig.group.pageSize;
-    this._groupRowCnt = opts.extraConfig.group.rowCtn;
+    this._groupRowCnt = opts.extraConfig.group.rowCnt;
     this._onSearchGroup = opts.extraConfig.group.onSearchGroup;
   }
   _addEventListener() {
@@ -56,7 +56,7 @@ export default class MonitorCanvas extends Canvas {
       ranksep: _.get(this.layout, 'options.ranksep') || 50,
       controlPoints: _.get(this.layout, 'options.controlPoints') || false,
     }, {
-      rowCtn: this._groupRowCnt
+      rowCnt: this._groupRowCnt
     });
 
     this.nodes.forEach((item, index) => {
