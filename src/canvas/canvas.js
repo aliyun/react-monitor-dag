@@ -102,8 +102,8 @@ export default class MonitorCanvas extends Canvas {
       rowCnt: ROW_CNT
     });
 
-    this.removeNodes(rmNodes, true);
-    this.addNodes(addNodes, true);
+    this.removeNodes(rmNodes);
+    this.addNodes(addNodes);
 
     this._onChangePage({
       nodes: group._showNodeList,
