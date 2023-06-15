@@ -87,9 +87,10 @@ interface ComProps {
   onClickEdge?(edge: any): void,                 // 单击线段事件
   onClickLabel?(label: string, edge: any): void, //单击label的事件
   onContextmenuEdge?(edge: any): void,           // 右键线段事件
-  onContextmenuGroup?(edge: any): void,           // 右键线段事件
+  onContextmenuGroup?(edge: any): void,          // 右键线段事件
   onChangePage?(data:any): void,                 // 分页事件
-  onLoaded?(data: any): void                              // 画布加载完成之后的回调
+  onLoaded?(data: any): void                     // 画布加载完成之后的回调
+  onNodeStatusChange?(data: any): void           // 画布有节点状态变化后的回调
 }
 
 export default class MonitorDag extends React.Component<ComProps, any> {
@@ -311,6 +312,7 @@ export default class MonitorDag extends React.Component<ComProps, any> {
           node.updateStatusPoint(node.status);
         }
       });
+      this.props.onNodeStatusChange && this.props.onNodeStatusChange(diffInfo.updateStatus);
     }
 
     this.canvasData = result;
