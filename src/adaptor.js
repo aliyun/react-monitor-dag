@@ -159,7 +159,7 @@ export let diffPropsData = (newData, oldData, diffOptions = []) => {
   });
   let updateStatus = [];
   newData.nodes.forEach((_newNode) => {
-    let oldNode = _.find(oldData, (_oldNode) => {
+    let oldNode = _.find(oldData.nodes, (_oldNode) => {
       return _newNode.id === _oldNode.id;
     });
     if (oldNode && oldNode.status !== _newNode.status) {

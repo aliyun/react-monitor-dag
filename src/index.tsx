@@ -306,13 +306,17 @@ export default class MonitorDag extends React.Component<ComProps, any> {
       this.canvas.removeEdges(diffInfo.rmEdges.map(item => item.id));
     }
     if (diffInfo.updateStatus.length > 0) {
-      diffInfo.updateStatus.forEach((item) => {
+      let nodesUpdateStatus = diffInfo.updateStatus.map((item) => {
         let node = this.canvas.getNode(item.node.id);
         if (node) {
           node.updateStatusPoint(node.status);
+          return {
+            status: item.status,
+            node
+          }
         }
-      });
-      this.props.onNodeStatusChange && this.props.onNodeStatusChange(diffInfo.updateStatus);
+      }).filter((item) => item);
+      this.props.onNodeStatusChange && this.props.onNodeStatusChange(nodesUpdateStatus);
     }
 
     this.canvasData = result;
