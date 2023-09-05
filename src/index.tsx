@@ -278,13 +278,13 @@ export default class MonitorDag extends React.Component<ComProps, any> {
     });
     let diffInfo = diffPropsData(result, this.canvasData, _.get(this, 'props.config.diffOptions', []));
     if (diffInfo.rmGroups.length > 0) {
-      this.canvas.removeGroups(diffInfo.rmNodes.map(item => item.id));
+      this.canvas.removeGroups(diffInfo.rmGroups.map(item => item.id));
     }
     if (diffInfo.addGroups.length > 0) {
       this.canvas.addGroups(diffInfo.addGroups);
     }
     if (diffInfo.rmNodes.length > 0) {
-      this.canvas.removeNodes(diffInfo.rmGroups.map(item => item.id));
+      this.canvas.removeNodes(diffInfo.rmNodes.map(item => item.id));
     }
     if (diffInfo.addNodes.length > 0) {
       this.canvas.addNodes(diffInfo.addNodes);
