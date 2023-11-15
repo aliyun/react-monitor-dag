@@ -43,6 +43,7 @@ npm install react-monitor-dag
 |   registerStatus  |     自行注册状态，根据node的status给节点加上class    |                <font color="c41d7f">object</font>               | key:value的形式，可以自行注册，和node的status字段对应起来 |
 |     statusNote    | 画布左上角状态注释，见[statusNote Prop](#statusNote) |                <font color="c41d7f">object</font>               |                        { }                        |
 |    onClickNode    |                    单击节点事件                   |            <font color="c41d7f">(node) => void</font>           |                         -                         |
+|    onClickCanvas    |                    单击画布事件                   |            <font color="c41d7f">() => void</font>           |                         -                         |
 | onContextmenuNode |                    右键节点事件                   |            <font color="c41d7f">(node) => void</font>           |                         -                         |
 |   onDblClickNode  |                    双击节点事件                   |            <font color="c41d7f">(node) => void</font>           |                         -                         |
 |    onClickEdge    |                    单击线段事件                   |            <font color="c41d7f">(edge) => void</font>           |                         -                         |
